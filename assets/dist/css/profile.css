@@ -1,0 +1,99 @@
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+.user-menu .user-image {
+    float: left;
+    /* width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px; */
+    margin-top: -2px;
+}
+.user-menu > a{
+    color: #1b1919;
+    font-size: .875rem;
+}
+.user-menu>.dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+}
+.user-menu .dropdown-menu, .user-menu .dropdown-menu>.user-body {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.user-menu> .dropdown-menu {
+    background: none !important;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    padding: 1px 0 0 0;
+    border-top-width: 0;
+    width: 280px;
+}
+
+.user-menu> .dropdown-menu>li.user-header {
+    /* background: url(http://localhost:84/Blog_nyarwanda_CMS/assets/image/img/photo1.png) center center; */
+    /* background-size: cover; */
+    /* overflow: hidden; */
+    width: 100%;
+    height: 175px;
+    padding: 10px;
+    text-align: center;
+    /* background-color: #3c8dbc; */
+}
+.user-menu>.dropdown-menu>li.user-header>img {
+    z-index: 5;
+    height: 90px;
+    width: 90px;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.user-menu>.dropdown-menu>li.user-header>p {
+    z-index: 5;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 17px;
+    margin-top: 10px;
+}
+.user-menu>.dropdown-menu>li.user-header>p>small {
+    display: block;
+    font-size: 12px;
+}
+.user-menu .dropdown-menu>.user-body {
+    background-color: #e2e8e8;
+    padding: 8px;
+    border-bottom: 1px solid #f4f4f4;
+    border-top: 1px solid #dddddd;
+}
+.user-menu .dropdown-menu, .user-menu .dropdown-menu>.user-body {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.user-menu .dropdown-menu>.user-body a {
+    color: #444 !important;
+    text-decoration: none;
+}
+.user-menu .dropdown-menu> .user-body:before, .user-menu .dropdown-menu>.user-body:after {
+    content: " ";
+    display: table;
+}
+.user-menu .dropdown-menu> .user-body:after {
+    clear: both;
+}
+.user-menu .dropdown-menu> .user-body:before, .user-menu .dropdown-menu>.user-body:after {
+    content: " ";
+    display: table;
+}
+
+.user-menu .dropdown-menu>.user-footer {
+    background-color: #f9f9f9;
+    padding: 10px;
+    padding-bottom: 28px;
+}
+.user-menu .dropdown-menu>.user-footer:before, .user-menu .dropdown-menu>.user-footer:after {
+    content: " ";
+    display: table;
+}
