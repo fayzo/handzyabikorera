@@ -43,7 +43,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '#form-food', function (e) {
+    $(document).on('click', '#form-craft', function (e) {
         // event.preventDefault();
         e.stopPropagation();
         var title = $('#title');
@@ -53,7 +53,7 @@ $(document).ready(function () {
         var other_photo = $('#other-photo');
         var video = $('#video');
         var youtube = $('#youtube');
-        var categories_food = $('#categories_food');
+        var categories_craft = $('#categories_craft');
         var price = $('#price');
         var phone = $('#phone');
         var province = $('.provincecode');
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
         if (isEmpty(province) && isEmpty(districts) &&
             isEmpty(sector) && isEmpty(cell) && isEmpty(village) && isEmpty(authors) && isEmpty(phone) &&
-            isEmpty(categories_food) && isEmpty(code) && isEmpty(price) && isEmpty(additioninformation) && isEmpty(photo) &&
+            isEmpty(categories_craft) && isEmpty(code) && isEmpty(price) && isEmpty(additioninformation) && isEmpty(photo) &&
             isEmpty(other_photo) && isEmpty(photo_Titleo0) && isEmpty(photo_Title0) && isEmpty(photo_Title1) &&
             isEmpty(photo_Title2) && isEmpty(photo_Title3) && isEmpty(photo_Title4) && isEmpty(photo_Title5)) {
 
@@ -96,7 +96,7 @@ $(document).ready(function () {
                 return false;
             } else {
                 $.ajax({
-                    url: 'core/ajax_db/food_addcategories.php',
+                    url: 'core/ajax_db/craft_addcategories.php',
                     method: "POST",
                     data: new FormData(this),
                     contentType: false,

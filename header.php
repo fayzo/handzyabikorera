@@ -152,5 +152,128 @@
         }, false);
 
     }
+
+    
+    function xxda(requests,formx, id) {
+        var xhr = new XMLHttpRequest();
+        var form = document.getElementById(formx);
+        var formData = new FormData(form);
+        // Add any event handlers here...
+        xhr.open('POST', 'index.php?actions=' + requests + '&code=' + id , true);
+        // xhr.open('POST', 'view_all_property.php?actions=' + requests + '&code=' + id , true);
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $("#responseSubmitfooditerm").html('<div class="alert alert-success alert-dismissible fade show text-center">'+
+                     '<button class="close" data-dismiss="alert" type="button">'+
+                         '<span>&times;</span>'+
+                     '</button> <strong>SUCCESS</strong>'+' </div>');
+                var forms = document.getElementById('responseSubmitfooditermview');
+                 setInterval(function () {
+                    $("#responseSubmitfooditerm").fadeOut();
+                            }, 2000);
+                forms.innerHTML = xhr.responseText;
+            }
+        };
+        console.log(requests,formx, id);
+    }
+    
+    function xxda_watch_list_delete(requests,formx, id) {
+        var xhr = new XMLHttpRequest();
+        var form = document.getElementById(formx);
+        var formData = new FormData(form);
+        // Add any event handlers here...
+        xhr.open('POST', 'core/ajax_db/watch_list_Fecth.php?actions=' + requests + '&code=' + id , true);
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $("#response_msg_watchlist").html('<div class="alert alert-success alert-dismissible fade show text-center">'+
+                     '<button class="close" data-dismiss="alert" type="button">'+
+                         '<span>&times;</span>'+
+                     '</button> <strong>SUCCESS</strong>'+' </div>');
+                 $('#response_hide_watchlist'+ id).hide();
+                 setInterval(function () {
+                    $("#response_msg_watchlist").fadeOut();
+                            }, 2000);
+            }
+        };
+    }
+
+    
+    function craftCategories(categories,id,user_id) {
+        $('#loader').show();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'core/ajax_db/craftView_FecthPaginat.php?pages=' + id + '&categories=' + categories + '&user_id=' + user_id, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                 // $('html,body').animate({scrollTop:0},0);
+                // $('html,body').animate({scrollTop:0},'slow');
+                setTimeout(() => {
+                    $('#loader').fadeOut();
+                }, 1000);
+                // $(window).scrollTop(0);
+                $('html,body').animate({scrollTop:0},'slow');
+                var pagination = document.getElementById('house-hide');
+                pagination.innerHTML = xhr.responseText;
+
+            }
+        };
+          xhr.addEventListener('progress',function(e){
+             var progress= Math.round((e.loaded/e.total)*100);
+             $('.progress-navbar').show();
+             $('#progress_width').css('width',progress +'%');
+             $('#progress_width').html(progress +'%');
+         }, false);
+
+        xhr.addEventListener('load', function (e) { 
+            $('.progress-bar').removeClass('bg-info').addClass('bg-danger').html('<span> completed  <span class="fa fa-check"></span></span>');
+            setInterval(function () {
+                $(".progress-navbar").fadeOut();
+            }, 2000);
+        }, false);
+    }
+    
+    function craft_agentCategories(categories,id,user_id) {
+        $('#loader').show();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'core/ajax_db/craft_agent_Fecth.php?pages=' + id + '&categories=' + categories + '&user_id=' + user_id, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+             
+                // $('html,body').animate({scrollTop:0},0);
+                // $('html,body').animate({scrollTop:0},'slow');
+                setTimeout(() => {
+                    $('#loader').fadeOut();
+                }, 1000);
+                // $(window).scrollTop(0);
+                $('html,body').animate({scrollTop:100},'slow');
+                var pagination = document.getElementById('house-hide');
+                pagination.innerHTML = xhr.responseText;
+            }
+        };
+    }
+
+    function xxda_prof_house_agent_delete(requests,formx, id) {
+        var xhr = new XMLHttpRequest();
+        var form = document.getElementById(formx);
+        var formData = new FormData(form);
+        // Add any event handlers here...
+        xhr.open('POST', 'core/ajax_db/craft_agent_Fecth.php?actions=' + requests + '&code=' + id , true);
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $("#response_msg_watchlist").html( xhr.responseText);
+                 $('#response_hide_watchlist'+ id).hide();
+                 setInterval(function () {
+                    $("#response_msg_watchlist").fadeOut();
+                            }, 2000);
+            }
+        };
+    }
+    
     
   </script>

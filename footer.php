@@ -106,6 +106,8 @@
 <script src="<?php echo BASE_URL_LINK ;?>js/settings.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/siderbarResponsive.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/craft_addcategories.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>js/likes.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>js/handmade_cart.js"></script>
 <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> 
 -->
 <script type="text/javascript">

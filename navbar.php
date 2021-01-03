@@ -62,7 +62,7 @@
                                         <div class="dropdown user-menu show">
                                             <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <?php if (!empty($user['profile_img'])) { ?>
-                                                    <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$user['profile_img'] ;?>" alt="" class="user-image rounded-circle" alt="User Image" >
+                                                    <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$user['profile_img'] ;?>" width="25px" height="25px" class="user-image rounded-circle"  alt="User Image" >
                                                 <?php  }else{ ?>
                                                     <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/1.png" alt="User Image" class="user-image" >
                                                 <?php } ?>
@@ -117,20 +117,42 @@
                                         </div>
                                         <?php }else{ ?>
                                             <!-- <a style="color:white;border: none;" class="btn btn-sm btn-outline-success" href="< ?php echo LOGIN; ?>">login</a> -->
-                                            <a id="login-please" data-login="1" href="javascript:void(0)" ><img src="<?php echo BASE_URL_LINK ;?>icon/1.png" alt="#" /> login</a>
+                                            <a id="login-please" data-login="1" href="javascript:void(0)" ><img src="<?php echo BASE_URL_LINK ;?>icon/1.png" alt="#" /> Register | Sign in</a>
                                             <!-- <a style="color:white;border: none;" class="btn btn-sm btn-outline-success" id="login-please" data-login="1" href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i> login</a> -->
                                         <?php } ?>
                                     </li>
-                                    <li class="tytyu">
-                                        <a href="#"><img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/2.png" alt="#" /></a>
+                                    <li class="tytyu" style="position: relative;display: inline-block;">
+                                        <?php if ($user['likes_counts'] > 0){ echo '<span class="likescounter badge badge-danger navbar-badge">'.$user["likes_counts"].'</span>' ;} ?>
+                                        <a href="<?php echo LIKE_HAND_MADE ;?>"> <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/2.png" alt="#" /></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/3.png" alt="#" /></a>
+                                        <?php if(isset($_SESSION["like_cart_item"])){ ?>
+
+                                            <div class="dropdown foodcarts user-menu show">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="messages-dropdown-menu">
+                                                <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/3.png" alt="#" />
+                                                <!-- <i style="font-size: 20px;" class="fa fa-shopping-cart"></i> -->
+                                                <span id="messages1"><?php if(count($_SESSION["like_cart_item"]) > 0){echo '<span  class="badge badge-danger navbar-badge">'.count($_SESSION["like_cart_item"]).'</span>'; } ?></span>
+                                                </a>
+                                                <ul class="dropdown-menu" >
+                                                    <li class="header main-active">You have <span><?php if(count($_SESSION["like_cart_item"]) > 0){echo '<span>'.count($_SESSION["like_cart_item"]).'</span>'; }else{ echo 'no' ;} ?></span> Cart</li>
+                                                    <li>
+                                                        <!-- inner menu: contains the actual data -->
+                                                        <ul class="menu bg-light" id="messages-menu-view" >
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        <?php  }else{ ?>
+                                                <a href="#"><img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/3.png" alt="#" /></a>
+                                        <?php } ?>
+
                                     </li>
 
                                     <li>
                                         <button type="button" id="sidebarCollapse" data-widget="pushmenu">
-                                            <img src="<?php echo BASE_URL_LINK ;?>images/menu_icon.png" alt="#" />
+                                            <img src="<?php echo BASE_URL_LINK ;?>images/menu_icon.png" alt="#" width="40px" />
                                         </button>
                                     </li>
                                 </ul>

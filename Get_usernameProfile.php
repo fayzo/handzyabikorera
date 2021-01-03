@@ -42,23 +42,24 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
             // $Exit_msg= $notification->getTotal_msgCountExit($user_id);
             // $notific= $notification->getNotificationCount($user_id);
 
-            // if(empty($_SESSION["foodcart_item"])) {
-            //     $productByCode = $users->runQuery("SELECT * FROM food_watchlist WHERE user_id3_list= $user_id ");
-            //     $TotalcodeByCode = $users->runQuery("SELECT COUNT(*) AS Totalcode  FROM food_watchlist WHERE user_id3_list=$user_id ");
-            //     if (!empty($productByCode[0]["code"])) {
-            //         # code...
-            //         $n = $TotalcodeByCode[0]['Totalcode'];
-            //         $i=0; 
-            //         $itemArray=[];
-            //         while ($i < $n) {
-            //             # code...
-            //             $itemArray += array($productByCode[$i]["code"]=>array('name'=>$productByCode[$i]["photo_Title_main_list"], 'code'=>$productByCode[$i]["code"], 'user_id'=>$productByCode[$i]["user_id3_list"], 'quantitys'=>$productByCode[$i]["quantitys"], 'price'=> $productByCode[$i]["price"]/$productByCode[$i]["quantitys"], 'image'=>$productByCode[$i]["photo_list"], 'food_id'=>$productByCode[$i]["food_id_list"], 'user_id3'=>$productByCode[$i]["user_id3_list"], 'categories'=>$productByCode[$i]["categories"]));
-            //             $i++;
-            //         }
-            //         $_SESSION["foodcart_item"] = $itemArray;
-            //         // var_dump($itemArray);
-            //     }
-            // }
+            if(empty($_SESSION["like_cart_item"])) {
+                $productByCode = $users->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id ");
+                $TotalcodeByCode = $users->runQuery("SELECT COUNT(*) AS Totalcode  FROM craft_watchlist WHERE user_id3_list=$user_id ");
+                if (!empty($productByCode[0]["code_watchlist"])) {
+                    # code...
+                    $n = $TotalcodeByCode[0]['Totalcode'];
+                    $i=0; 
+                    $itemArray=[];
+                    while ($i < $n) {
+                        # code...
+                        $itemArray += array($productByCode[$i]["code_watchlist"]=>array('name'=>$productByCode[$i]["photo_Title_main_list"], 'code'=>$productByCode[$i]["code_watchlist"], 'user_id'=>$productByCode[$i]["user_id3_list"], 'quantitys'=>$productByCode[$i]["quantitys"], 'price'=> $productByCode[$i]["price_watchlist"]/$productByCode[$i]["quantitys"], 'image'=>$productByCode[$i]["photo_list"], 'craft_id'=>$productByCode[$i]["craft_id_list"], 'user_id3'=>$productByCode[$i]["user_id3_list"], 'categories'=>$productByCode[$i]["categories"]));
+                        $i++;
+                    }
+                    $_SESSION["like_cart_item"] = $itemArray;
+                    // var_dump($itemArray);
+                    // var_dump($_SESSION["like_cart_item"]);
+                }
+            }
 
         }else{
             $user_id= $profileData['user_id'];
@@ -75,5 +76,5 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
 
 }
 
-// echo $food->Foodcart_item(); 
+echo $handmade->like_cart_item(); 
 ?>

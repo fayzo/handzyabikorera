@@ -6,15 +6,24 @@
 <?php include "navbar.php" ?>
 
             <section class="slider_section">
-
-                <?php echo $home->craftList_homeNavbarblack('craft',1,1); ?>
-
-                <div class="text-center">
-                    <h1>Handmade by Artist in Rwanda</h1>
-                    <p>Select Your Desire Arts</p>
+                <?php echo $handmade->craftList_homeNavbarblack('Featured',1,1); ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="text-center">
+                                <h1>Handmade by Artist in Rwanda</h1>
+                                <p>Select Your Desire Arts</p>
+                            </div>
+                            <?php echo $handmade->handmade_list('Featured',1,$user_id); ?>
+                        </div>
+                        <div class="col-md-3">
+                            <span id="responseSubmitfooditerm"> </span>
+                            <div id="responseSubmitfooditermview">
+                                <?php echo $handmade->Craft_showCart_itemSale(); ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <?php echo $handmade->handmade_list(); ?>
                 
             </section>
 

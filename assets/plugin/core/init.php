@@ -5,6 +5,7 @@ include('database/db.php');
 include('class/Users.php');
 include('class/Home.php');
 include('class/Handmade.php');
+include('class/Profile_craft_agent.php');
 
 // define('BASE_URL','https://iragiro.com/');
 define('BASE_URL','http://localhost/handmade_craft/');
@@ -16,9 +17,18 @@ define('LOGIN', BASE_URL.'includes/login');
 define('LOGOUT', BASE_URL.'includes/logout');
 define('ADMIN', BASE_URL.'admin');
 
+// UPLOAD PHOTO
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'].'/handmade_craft');
+// UPLOAD PHOTO
+// (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')? 'https' : 'http';
+// echo  $_SERVER['SERVER_NAME'];
+// echo  $_SERVER['REQUEST_URI'];
 
 // THIS IS HOUSE LINK
 // define('PROFILE', BASE_URL.'profile');
+define('LIKE_HAND_MADE', BASE_URL.'likes');
+define('SHOWCART', BASE_URL.'showcart.php');
+define('CHECKOUT', BASE_URL.'checkout.php');
 define('SETTING', BASE_URL.'settings.php');
 define('PROFILE_EDIT', BASE_URL.'profile_edit.php');
 define('VIEW_MESSAGE', BASE_URL.'message.php');

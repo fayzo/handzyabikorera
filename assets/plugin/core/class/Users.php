@@ -201,6 +201,87 @@ class Users extends Db{
         }
     }
 
+    
+    public function creates($table,$fields=array())
+    {
+        $mysqli= $this->database;
+        function addQuotes($str){
+            return "'$str'";
+        }
+         $valued = array();
+        # Surround values by quotes
+        foreach ($fields as $key => $value) {
+            $valued[] = addQuotes($value);
+        }
+        
+        # Build the column
+        $columns = implode(",", array_keys($fields));
+        
+        # Build the values
+        $values = implode(",", array_values($valued));
+        # Build the insert query
+        $queryl = "INSERT INTO $table (".$columns.") VALUES (".$values.")";
+        $query= $mysqli->query($queryl);
+
+        // if($query){
+        //         exit('<div class="alert alert-success alert-dismissible fade show text-center">
+        //             <button class="close" data-dismiss="alert" type="button">
+        //                 <span>&times;</span>
+        //             </button>
+        //             <strong>SUCCESS</strong> </div>');
+        //     }else{
+        //         exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+        //             <button class="close" data-dismiss="alert" type="button">
+        //                 <span>&times;</span>
+        //             </button>
+        //             <strong>Fail input try again !!!</strong>
+        //         </div>');
+        // }
+        $row= json_encode($mysqli->insert_id);
+        // var_dump($queryl,$query);
+        return $row;
+    }
+
+    static  public function createss($table,$fields=array())
+    {
+        $mysqli= self::$databases;
+
+         $valued = array();
+        # Surround values by quotes
+        foreach ($fields as $key => $value) {
+            $valued[] = "'$value'";
+        }
+        
+        # Build the column
+        $columns = implode(",", array_keys($fields));
+        
+        # Build the values
+        $values = implode(",", array_values($valued));
+
+        # Build the insert query
+        $queryl = "INSERT INTO $table (".$columns.") VALUES (".$values.")" ;
+        $query= $mysqli->query($queryl);
+        $row= json_encode($mysqli->insert_id);
+        // $query1= "DELETE FROM notification WHERE notification_id= $row AND type= 'retweet' ";
+        // $mysqli->query($query1);
+
+        // if($query){
+        //         exit('<div class="alert alert-success alert-dismissible fade show text-center">
+        //             <button class="close" data-dismiss="alert" type="button">
+        //                 <span>&times;</span>
+        //             </button>
+        //             <strong>SUCCESS</strong> </div>');
+        //     }else{
+        //         exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+        //             <button class="close" data-dismiss="alert" type="button">
+        //                 <span>&times;</span>
+        //             </button>
+        //             <strong>Fail input try again !!!</strong>
+        //         </div>');
+        // }
+        
+    }
+
     public function test_input($data)
     {
         $mysqli=$this->database;

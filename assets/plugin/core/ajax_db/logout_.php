@@ -6,7 +6,7 @@ $users->forgotUsernameCountsTodelete('users',
 array('forgotUsernameCounts' => 'forgotUsernameCounts +1', ),$_SESSION['keycreate']);
 $db->query("UPDATE users SET chat = 'off' WHERE user_id= $_SESSION[key_food] ");
 
-unset($_SESSION['key_food']);
+unset($_SESSION['key_craft']);
 unset($_SESSION['profile_img']);
 unset($_SESSION['approval']);
 unset($_SESSION['chat']);

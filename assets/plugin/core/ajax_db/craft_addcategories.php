@@ -8,20 +8,22 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
      ?>
 
 <div class="craft-popup">
-    <div class="wrap6">
+    <div class="wrap6" id="disabler">
+        <div class="wrap6Pophide" onclick="togglePopup ( )" ></div>
         <span class="colose">
         	<button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button>
         </span>
-        <div class="img-popup-wrap">
+        <div class="img-popup-wrap" id="popupEnd" >
         	<div class="img-popup-body">
 
             <div class="card">
                 <span id="responseSubmitfood"></span>
                 <div class="card-header">
-                    <h5 class="card-text">Food</h5>
-                    <p class="card-text">Add food ? Please fill details below.</p>
+                    <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
+                    <h5 class="card-text">Handmade craft</h5>
+                    <p class="card-text">Add Your craft ? Please fill details below.</p>
                 </div>
-                <form method="post" id="form-food"  enctype="multipart/form-data" >
+                <form method="post" id="form-craft"  enctype="multipart/form-data" >
                 <div class="card-body">
                       <input type="hidden" name="user_id" value="<?php echo $user_id ;?>">
                            <div>Choose your location and categories </div>
@@ -113,13 +115,15 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                       <div class="form-row mt-2">
                         <div class="col">
                             <div class="form-group">
-                              <select class="form-control" name="categories_food" id="categories_food">
+                              <select class="form-control" name="categories_craft" id="categories_craft">
                                 <option value="">Select what types of categories</option>
-                                <option value="food">food</option>
-                                <option value="drink">drink</option>
-                                <option value="fruits">fruits</option>
-                                <option value="vegetables">vegetables</option>
-                                <option value="macedone">macedone</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Wood_Craft">Wood Craft</option>
+                                <option value="Homeware">Homeware</option>
+                                <option value="Jewellery">Jewellery</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Accessories">Accessories</option>
                               </select>
                             </div>
                         </div>
@@ -144,7 +148,7 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                       </div>
 
                       <div class="form-group mt-2">
-                        <textarea class="form-control" name="additioninformation" id="addition-information" placeholder="tell us who are you and what help you need and Try to summarize People can understand what helps you need" rows="3"></textarea>
+                        <textarea class="form-control" name="additioninformation" id="addition-information" placeholder="tell us you are product" rows="3"></textarea>
                       </div>
 
                       <div class="form-row mt-2">
@@ -227,7 +231,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
 
     $authors = $users->test_input($_POST['authors']);
     $additioninformation = $users->test_input($_POST['additioninformation']);
-    $categories_food=  $users->test_input($_POST['categories_food']);
+    $categories_craft=  $users->test_input($_POST['categories_craft']);
     $price = $users->test_input($_POST['price']);
     $phone = $users->test_input($_POST['phone']);
      $province =  $users->test_input($_POST['provincecode']);
@@ -287,7 +291,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                     <strong>The text is too long !!!</strong> </div>');
 		}
 
-	$users->Postsjobscreates('food',array( 
+	$users->Postsjobscreates('craft',array( 
 	'authors'=> $authors,
   'photo'=> $photo_, 
 	'code'=> $code,
@@ -306,7 +310,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
 	'cell'=> $cell,
 	'village'=> $village,
   'text'=> $additioninformation,
-  'categories_food'=> $categories_food,
+  'categories_craft'=> $categories_craft,
   'user_id3'=> $user_id,
   'created_on3'=> $datetime ));
     }
