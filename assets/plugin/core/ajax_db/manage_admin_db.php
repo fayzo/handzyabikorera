@@ -75,7 +75,7 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 		if ($_POST['key'] == 'deleteRowHouse') {
 			$conn =$db;
 			$house_id=$_POST['rowID'];
-			$house->deleteHouse($house_id);
+			$handmade->deleteHouse($house_id);
 			exit('The Row Has Been Deleted!');
 		}
 

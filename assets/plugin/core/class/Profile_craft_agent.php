@@ -98,7 +98,7 @@ class Profile_craft_agent extends Handmade {
 
                     <?php if(isset($_SESSION['key_craft'])){ 
                             
-                            if($craft['user_id3_list'] != $user_id && $craft['house_id_list'] != $craft['craft_id']  ){ 
+                            if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ 
                                 
                                     if($_SESSION['key'] == $craft['user_id3']   ){ ;?>
                                     <div class="overlay_hover">

@@ -717,7 +717,7 @@ class Users extends Db{
     public function countPOSTS()
     {
         $db =$this->database;
-        $sql= $db->query('SELECT COUNT(*) FROM food');
+        $sql= $db->query('SELECT COUNT(*) FROM craft');
         $row_post = $sql->fetch_array();
         $total_post= array_shift($row_post);
         $array= array(0,$total_post);
@@ -725,10 +725,10 @@ class Users extends Db{
         echo $total_posts;
     }
 
-    public function countPost_food()
+    public function countPost_sold()
     {
         $db =$this->database;
-        $sql= $db->query('SELECT COUNT(*) FROM food WHERE categories_food = "food" ');
+        $sql= $db->query('SELECT COUNT(*) FROM craft WHERE buy = "sold" ');
         $row_comment = $sql->fetch_array();
         $total_comment= array_shift($row_comment);
         $array= array(0,$total_comment);
@@ -736,10 +736,10 @@ class Users extends Db{
         echo $total_comments;
     }
 
-    public function countPost_beverage()
+    public function countPost_rent()
     {
         $db =$this->database;
-        $sql= $db->query('SELECT COUNT(*) FROM food WHERE categories_food = "drink" ');
+        $sql= $db->query('SELECT COUNT(*) FROM craft WHERE buy = "rent" ');
         $row_comment = $sql->fetch_array();
         $total_comment= array_shift($row_comment);
         $array= array(0,$total_comment);
@@ -747,10 +747,10 @@ class Users extends Db{
         echo $total_comments;
     }
 
-    public function countPost_fruits()
+    public function countPost_sale()
     {
         $db =$this->database;
-        $sql= $db->query('SELECT COUNT(*) FROM food WHERE categories_food = "fruits" ');
+        $sql= $db->query('SELECT COUNT(*) FROM craft WHERE buy = "sale" ');
         $row_comment = $sql->fetch_array();
         $total_comment= array_shift($row_comment);
         $array= array(0,$total_comment);

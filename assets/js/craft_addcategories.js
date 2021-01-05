@@ -43,6 +43,29 @@ $(document).ready(function () {
         });
     });
 
+    
+    $(document).on('click', '#contacts_business', function (e) {
+
+        e.stopPropagation();
+        var contacts_business = $(this).data('contacts');
+
+        $.ajax({
+            url: 'core/ajax_db/contact',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                contacts_business: contacts_business,
+            }, success: function (response) {
+                $(".popupTweet").html(response);
+                $(".close-imagePopup").click(function () {
+                $(".house-popup").hide();
+                });
+                // console.log(response);
+            }
+        });
+    });
+
+
     $(document).on('click', '#form-craft', function (e) {
         // event.preventDefault();
         e.stopPropagation();

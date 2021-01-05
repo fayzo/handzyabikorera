@@ -252,6 +252,32 @@ button {
 	margin: 0;
 	padding: 0;
 }
+.top-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.top-nav li {
+    display: inline;
+    padding: .1rem .5rem;
+    border-right: 1px solid #fff;
+}
+
+.top-nav li:last-of-type {
+    border-right: 0;
+}
+
+.top-nav li a {
+    /* color: #e0e0e0; */
+    text-decoration: none;
+}
+
+.top-nav li a:hover, .top-nav li a:focus {
+    color: #2e63f3;
+}
 
 
 /**-- heading section --**/
@@ -2091,7 +2117,7 @@ background: #f0efef;
      border: #fff solid 2px;
      border-radius: inherit;
      margin-bottom: 20px;
-     padding: 13px 20px;
+     padding: 20px 20px;
      box-shadow: #ddd 0px 0px 11px 4px;
      font-family: poppins;
 }

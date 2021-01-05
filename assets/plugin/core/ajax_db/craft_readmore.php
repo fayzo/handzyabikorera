@@ -19,8 +19,9 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
         Left JOIN cells C ON H. cell = C. codecell
         Left JOIN vilages V ON H. village = V. CodeVillage 
         Left JOIN users U ON H. user_id3 = U. user_id 
+        Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
     WHERE H. craft_id = $craft_id ");
-    $row = $query->fetch_array();
+    $craft = $query->fetch_array();
     ?>
 
     <div class="craft-popup">
@@ -68,7 +69,7 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                         <div class="img_box" >
                                         <?php 
-                                            $file = $row['photo']."=".$row['other_photo'];
+                                            $file = $craft['photo']."=".$craft['other_photo'];
                                             $expode = explode("=",$file); ?>
                                             <figure><img class="product-big-img" src="<?php echo BASE_URL.'uploads/craft/'.$expode[0]; ?>" alt=""></figure>
                                         </div>
@@ -111,7 +112,7 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
 
                                                  <?php if(isset($_SESSION['key_craft'])){ if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ ;?>
                                                     <form method="post" class="cart" id="form-craft-cartitem<?php echo $craft['code']; ?>add">
-                                                        <div style="display:inline-flex;" >
+                                                        <!-- <div style="display:inline-flex;" > -->
                                                             <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $user_id; ?>" />
                                                             <input type="hidden" style="width:30px;" name="actions" value="add" />
                                                             <input type="hidden" style="width:30px;" name="code" value="<?php echo $craft['code']; ?>" />
@@ -119,8 +120,8 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                                             <div class="quantity">
                                                                 <input step="1" min="1" max="5" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" type="number">
                                                             </div>
-                                                            <a class="bt_main" href="#" onclick="xxda('add','<?php echo 'form-craft-cartitem'.$craft['code'].'add'; ?>','<?php echo $craft['code']; ?>');" >+ Add to cart</a>
-                                                        </div>
+                                                            <button type="button" class="bt_main"  onclick="xxda('add','<?php echo 'form-craft-cartitem'.$craft['code'].'add'; ?>','<?php echo $craft['code']; ?>');" >+ Add to cart</button>
+                                                        <!-- </div> -->
                                                     </form>
                                                 <?php  } }else{ ?>
                                                     <form class="cart" method="post" action="#">
@@ -200,17 +201,20 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                                                     <div class="full review_bt_section">
                                                                         <div class="float-right">
 
-                                                                            <a class="bt_main" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a Review</a>
+                                                                            <a class="bt_main" data-toggle="collapse" href="#collapseExample0" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a Review</a>
 
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="full">
 
-                                                                        <div id="collapseExample" class="full collapse commant_box">
+                                                                        <div id="collapseExample0" class="full collapse commant_box">
                                                                             <form accept-charset="UTF-8" action="index.html" method="post">
                                                                                 <input id="ratings-hidden" name="rating" type="hidden">
                                                                                 <textarea class="shadow-form-control form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." required=""></textarea>
+                                                                                <input type="text" class="shadow-form-control form-control" id="name" name="name" placeholder="Your Name" required="" data-error="Please enter your name">
+                                                                                <input type="text" placeholder="Your Email" id="email" class="shadow-form-control form-control" name="name" required="" data-error="Please enter your email">
+
                                                                                 <div class="full_bt center">
                                                                                     <button class="bt_main" type="submit">Save</button>
                                                                                 </div>
@@ -305,7 +309,7 @@ if(isset($_POST['contacts_agent'])){
 
     $mysqli= $db;
     $query= $mysqli->query("SELECT * FROM users WHERE user_id = $user_id ");
-    $row = $query->fetch_array();
+    $craft = $query->fetch_array();
     ?>
 
     <div class="house-popup">
@@ -326,8 +330,8 @@ if(isset($_POST['contacts_agent'])){
                             <div class="user-block">
                                 <div class="user-blockImgBorder">
                                     <div class="user-blockImg">
-                                        <?php if (!empty($row['profile_img'])) { ?>
-                                            <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$row['profile_img']; ?>" alt="User Image">
+                                        <?php if (!empty($craft['profile_img'])) { ?>
+                                            <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$craft['profile_img']; ?>" alt="User Image">
                                         <?php  }else{ ?>
                                             <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE;?>" alt="User Image">
                                         <?php } ?>
@@ -339,7 +343,7 @@ if(isset($_POST['contacts_agent'])){
                                 <span class="description">Publish <i class="fa fa-clock-o" style="color: #2cbdb8;margin-right: 4px;" aria-hidden="true"></i>- Sep 17, 2019</span> -->
                             </div>
                                 <div class="agent-title">
-                                    <h5><a href="<?php echo BASE_URL.$row['username']; ?>"> Contact <?php echo $row['lastname']; ?></a></h5>
+                                    <h5><a href="<?php echo BASE_URL.$craft['username']; ?>"> Contact <?php echo $craft['lastname']; ?></a></h5>
                                     <!-- <span>Saler Marketing </span> -->
                                     <span class="mr-2"> Agent </span>
                                     <span class="agent-social">
@@ -348,23 +352,23 @@ if(isset($_POST['contacts_agent'])){
                                         <a href="< ?php echo $businessDetails['google_plus_business']; ?>"><i class="fa fa-google-plus"></i></a>
                                         <a href="< ?php echo $businessDetails['instagram_business']; ?>"><i class="fa fa-instagram"></i></a>
                                         <a href="< ?php echo $businessDetails['email_business']; ?>>"><i class="fa fa-envelope"></i></a> -->
-                                        <?php  if(!empty($row['facebook'])){ ?>
-                                        <a target="_blank" href="<?php echo $row['facebook']; ?>"><i class="fa fa-facebook"></i></a>
+                                        <?php  if(!empty($craft['facebook'])){ ?>
+                                        <a target="_blank" href="<?php echo $craft['facebook']; ?>"><i class="fa fa-facebook"></i></a>
                                         <?php }else { ?>
                                             <a target="_blank" href="<?php echo $businessDetails['facebook_business']; ?>"><i class="fa fa-facebook"></i></a>
                                         <?php } ?>
-                                        <?php  if(!empty($row['twitter'])){ ?>
-                                            <a href="<?php echo $row['twitter']; ?>"><i class="fa fa-twitter"></i></a>
+                                        <?php  if(!empty($craft['twitter'])){ ?>
+                                            <a href="<?php echo $craft['twitter']; ?>"><i class="fa fa-twitter"></i></a>
                                         <?php }else { ?>
                                             <a target="_blank" href="<?php echo $businessDetails['twitter_business']; ?>"><i class="fa fa-twitter"></i></a>
                                         <?php } ?>
-                                        <?php  if(!empty($row['instagram'])){ ?>
-                                            <a target="_blank" href="<?php echo $row['instagram']; ?>"><i class="fa fa-instagram"></i></a>
+                                        <?php  if(!empty($craft['instagram'])){ ?>
+                                            <a target="_blank" href="<?php echo $craft['instagram']; ?>"><i class="fa fa-instagram"></i></a>
                                         <?php }else { ?>
                                             <a target="_blank" href="<?php echo $businessDetails['instagram_business']; ?>"><i class="fa fa-instagram"></i></a>
                                         <?php } ?>
-                                        <?php  if(!empty($row['email'])){ ?>
-                                            <a target="_blank" href="<?php echo $row['email']; ?>"><i class="fa fa-envelope"></i></a>
+                                        <?php  if(!empty($craft['email'])){ ?>
+                                            <a target="_blank" href="<?php echo $craft['email']; ?>"><i class="fa fa-envelope"></i></a>
                                         <?php }else { ?>
                                             <a target="_blank" href="<?php echo $businessDetails['email_business']; ?>>"><i class="fa fa-envelope"></i></a>
                                         <?php } ?>
@@ -377,7 +381,7 @@ if(isset($_POST['contacts_agent'])){
                 <form action="#" method="post" id="form_agentMessage" class="agent-contact-form">
                 <div class="card-body">
                     <div id="responses"></div> 
-                    <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $craft['user_id']; ?>">
                     <input type="hidden" name="craft_id" value="0">
                             <div class="form-row">
                                 <div class="col-12">

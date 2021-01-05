@@ -912,7 +912,7 @@ class Handmade extends Home {
                                  -->
                                 <div class="btn-group btn-group-sm">
                                     <a href="javascript:void(0)" onclick="viewOReditHouses(<?php echo $row['craft_id'];?>, 'EditHouseAdmin')"   class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" id="house-readmore" data-house="<?php echo $row['craft_id']; ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="javascript:void(0)" id="craft-readmore" data-craft="<?php echo $row['craft_id']; ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                     <a href="javascript:void(0)" onclick="deleteRow(<?php echo $row['craft_id'];?>,'deleteRowHouse')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 </div>
                                 <!-- <div class="btn-group btn-group-sm">
@@ -938,6 +938,44 @@ class Handmade extends Home {
 
 <?php   }
 
+
+    public function deleteHouse($craft_id)
+    {
+        $mysqli= $this->database;
+        $query="DELETE H,A,W FROM craft H 
+                        LEFT JOIN agent_message A ON A. craft_id_msg = H. craft_id 
+                        LEFT JOIN craft_watchlist W ON W. craft_id_list = H. craft_id 
+                        WHERE H. craft_id = '{$craft_id}' ";
+
+        $query1="SELECT * FROM craft WHERE craft_id = $craft_id ";
+
+        $result= $mysqli->query($query1);
+        $rows= $result->fetch_assoc();
+
+        if(!empty($rows['photo'])){
+            $photo=$rows['photo'].'='.$rows['other_photo'];
+            $expodefile = explode("=",$photo);
+            $fileActualExt= array();
+            for ($i=0; $i < count($expodefile); ++$i) { 
+                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
+            }
+            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt'); // valid extensions
+            if (array_diff($fileActualExt,$allower_ext) == false) {
+                $expode = explode("=",$photo);
+                $uploadDir = DOCUMENT_ROOT.'/uploads/craft/';
+                for ($i=0; $i < count($expode); ++$i) { 
+                    unlink($uploadDir.$expode[$i]);
+                }
+            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
+                $uploadDir = DOCUMENT_ROOT.'/uploads/craft/';
+                    unlink($uploadDir.$photo);
+            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
+                $uploadDir = DOCUMENT_ROOT.'/uploads/craft/';
+                    unlink($uploadDir.$photo);
+            }
+        }
+    }
+
     public function buychangesColor($variable){
 
         switch ($variable) {
@@ -958,6 +996,266 @@ class Handmade extends Home {
                 break;
             }
         }
+    
+        public function edit_delete_Admincraft($variable){ ?>
+
+            <table class="table table-responsive-sm table_adminLA1 table-hover ">
+                <thead class="main-active">
+                    <tr>
+                        <th>N0</th>
+                        <th class="text-center">
+                            <i class="icon-people"></i>
+                        </th>
+                        <th>PRICE/PROPERTY</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+            <?php switch ($variable) {
+                case $variable :
+                    # code... ?>
+                    <?php 
+                            $increment= 1;
+                            $mysqli= $this->database;
+                            if ($variable == 'Featured') {
+                                # code...
+                                $result= $mysqli->query("SELECT * FROM craft ");
+                            }else{
+
+                                $result= $mysqli->query("SELECT * FROM craft WHERE categories_craft= '$variable' ");
+                            }
+                        if ($result->num_rows > 0) {
+                            while($row= $result->fetch_array()){ ?>
+                        <tr id="house_n<?php echo $row['craft_id']; ?>">
+                            <td><?php echo  $increment++ ; ?></td>
+                            <td class="text-center">
+                                <div class="avatar">
+                                    <?php
+                                    $file = $row['photo'];
+                                    $expode = explode("=",$file);  ?>
+                                    <img class="img-avatar" width="80px" 
+                                        src="<?php echo BASE_URL.'uploads/craft/'.$expode[0]; ?>" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <div><?php echo number_format($row['price']); ?> Frw 
+                                    </div>
+                                    <div> <?php echo $this->buychangesColor($row['buy']); ?></div>
+                                    <?php if($row['price_discount'] != 0){ ?>
+                                    <div class="text-danger price-change" style="text-decoration: line-through;">
+                                        <?php echo number_format($row['price_discount']); ?> Frw 
+                                    </div> 
+                                <?php } ?>
+                                <?php 
+                                    $subect = $row['categories_craft'];
+                                    $replace = " ";
+                                    $searching = "_";
+                                    echo str_replace($searching,$replace, $subect);
+                                ?>
+                                <div class="text-danger price-change"><?php echo $row['code']; ?></div>
+                                <div>Approval: <span id="approvalHouse<?php echo $row["craft_id"] ;?>"><?php echo $row["approval_top"];?></span></div> 
+                            </td>
+                            <td>
+                                <input type="button" onclick="viewOReditHouses(<?php echo $row['craft_id'];?>, 'EditHouseAdmin')" value="Edit" class="btn btn-primary">
+                                <input type="button" id="craft-readmore" data-craft="<?php echo $row['craft_id']; ?>" value="View" class="btn">
+                                <input type="button" onclick="deleteRow(<?php echo $row['craft_id'];?>,'deleteRowHouse')" value="Delete" class="btn btn-danger">
+                                <input type="button" onclick="approvedHouses(<?php echo $row['craft_id'];?>, 'off')" value="off" class="btn btn-warning btn-sm ">
+                                <input type="button" onclick="approvedHouses(<?php echo $row['craft_id'];?>, 'on')" value="on" class="btn btn-success btn-sm">
+                            </td>
+                        </tr>
+                <?php 
+                        } }else{ 
+                        # code...  ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>No record</td>
+                            <td></td>
+                        </tr>
+                    <?php    }
+                break;
+            } ?>
+                    </tbody>
+                </table>
+    
+ <?php   }
+
+    
+    public function Message_activities(){ ?>
+
+        <table class="table  table-responsive-sm table_adminLA3 table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>lastname</th>
+                    <th>email/phone</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+
+        <?php 
+        
+        $increment= 1;
+        $mysqli = $this->database;
+        $sql=  $mysqli->query("SELECT * FROM business_message ORDER BY datetime DESC");
+        if ($sql->num_rows > 0) {
+
+            while ($row = $sql->fetch_array()) {
+                    # code...
+            
+                ?>
+                    <tr id="name_msg<?php echo $row['message_id']; ?>">
+
+                        <td><?php echo  $increment++ ; ?></td>
+                        <td><?php echo $row['name_client']; ?></td>
+                        <td>
+                            <?php echo $row['email_client']; ?> |
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i> 
+                            <div> <?php echo $row['phone_client']; ?></div>
+                        </td>
+                        <td><div><?php echo $this->timeAgo($row['datetime']); ?></div>
+                            <input type="button" onclick="business_msg(<?php echo $row['message_id'];?>, 'business_message_view')" value="View" class="btn">
+                            <input type="button" onclick="deleteRowHouse(<?php echo $row['message_id'];?>, 'business_message_delete')" value="Delete" class="btn btn-danger">
+                        </td>
+                    </tr>
+        <?php
+            } }else{
+                # code...  ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>No record</td>
+                    <td></td>
+                </tr>
+                
+        <?php } ?>
+        
+        </tbody>
+    </table>
+
+    <?php   }
+
+    public function Message_sentToAgentAdmin(){ ?>
+
+        <table class="table  table-responsive-sm table_adminLA5 table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>House</th>
+                    <th>name</th>
+                    <th>email/phone</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+
+        <?php 
+        
+        $increment= 1;
+        $mysqli = $this->database;
+        $sql=  $mysqli->query("SELECT * FROM agent_message  A 
+        LEFT JOIN craft H ON A. craft_id_msg = H. craft_id ORDER BY datetime DESC");
+        if ($sql->num_rows > 0) {
+
+            while ($row = $sql->fetch_array()) {
+                    # code...
+            
+                ?>
+                    <tr id="agent_msg<?php echo $row['message_id']; ?>">
+
+                        <td><?php echo  $increment++ ; ?></td>
+                        <td class="text-center">
+                            <div class="avatar">
+                                <?php
+                                $file = $row['photo'];
+                                $expode = explode("=",$file);  ?>
+                                <img class="img-avatar" width="80px" 
+                                    src="<?php echo BASE_URL.'uploads/house/'.$expode[0]; ?>" alt="">
+                            </div>
+                        </td>
+                        <td><?php echo $row['name_client']; ?></td>
+                        <td>
+                            <?php echo $row['email_client']; ?> |
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i> 
+                            <div> <?php echo $row['phone_client']; ?></div>
+                        </td>
+                        <td><div><?php echo $this->timeAgo($row['datetime']); ?></div>
+                            <input type="button" onclick="business_msg(<?php echo $row['message_id'];?>, 'agent_message_view')" value="View" class="btn">
+                            <input type="button" onclick="deleteRowHouse(<?php echo $row['message_id'];?>, 'agent_message_delete')" value="Delete" class="btn btn-danger">
+                        </td>
+                    </tr>
+        <?php
+            } }else{
+                # code...  ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>No record</td>
+                    <td></td>
+                </tr>
+                
+        <?php } ?>
+        
+        </tbody>
+    </table>
+
+    <?php   }
+
+
+
+    public function newsletter_subscribe(){ ?>
+
+        <table class="table  table-responsive-sm table_adminLA4 table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Email</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+
+        <?php 
+        
+        $increment= 1;
+        $mysqli = $this->database;
+        $sql=  $mysqli->query("SELECT * FROM client_subscribe_email ORDER BY datetime DESC");
+    
+        if ($sql->num_rows > 0) {
+
+            while ($row = $sql->fetch_array()) {
+                    # code...
+                ?>
+                    <tr id="name_subscribe<?php echo $row['client_subscribe_id']; ?>">
+
+                        <td><?php echo  $increment++ ; ?></td>
+                        <td>
+                            <?php echo $row['email_subscribe']; ?> |
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i> 
+                        </td>
+                        <td><div><?php echo $this->timeAgo($row['datetime']); ?></div>
+                            <input type="button" onclick="deleteRowHouse(<?php echo $row['client_subscribe_id'];?>,'client_subscribe_delete')" value="Delete" class="btn btn-danger">
+                        </td>
+                    </tr>
+        <?php
+            } }else{
+
+                # code...  ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>No record</td>
+                    <td></td>
+                </tr>
+        <?php } ?>
+
+        </tbody>
+    </table>
+
+    <?php   }
+
 
 
 

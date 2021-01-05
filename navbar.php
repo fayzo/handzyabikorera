@@ -31,12 +31,51 @@
     <div id="content">
         <!-- header -->
         <header>
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-12 py-2 d-md-block d-none" style="background-color: #f3f3f3 ;">
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <ul class="top-nav">
+                                    <li>
+                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+(250)-787-384312</a>
+                                    </li>
+                                    <li>
+                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i>irangiro@ubukorikori.com</a>
+                                    </li>
+                                    <li>
+                                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-success text-dark mr-2 border-0" id="contacts_business" data-contacts="contacts_business">
+                                    @ CONTACT US</a>
+                                        <!-- <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i>irangiro@ubukorikori.com</a> -->
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto">
+                                <ul class="top-nav">
+                                    <li>
+                                        <a href="register.html"><i class="fas fa-map-marker-alt mr-2"></i>Kigali-Rwanda</a>
+                                        <!-- <a href="register.html"><i class="fas fa-user-edit mr-2"></i>Register</a> -->
+                                    </li>
+                                    <li>
+                                        <a href="login.html"><i class="fas fa-map mr-2"></i>Address:KG 534 St, RW</a>
+                                        <!-- <a href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Login</a> -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+
             <!-- header inner -->
             <div class="header">
 
                 <div class="container-fluid">
 
                     <div class="row">
+
                         <div class="col-lg-3 logo_section">
                             <div class="full">
                                 <div class="center-desk">
