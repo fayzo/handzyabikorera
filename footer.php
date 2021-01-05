@@ -6,22 +6,23 @@
         <div class="container">
             <div class="footer-text" style="padding: 30px;">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 mb-3">
                         <div class="footer-logo">
-                            <div class="logos" style="margin-bottom: 20px;">
+                            <div class="logos  mb-3" >
+                            <!-- style="margin-bottom: 20px;" -->
                                 <a href="<?php echo HOME; ?>"> 
                                     <img src="<?php echo BASE_URL_LINK ;?>images/logo.jpg">
                                 </a>
                             </div>
-                            <ul style="list-style-type: none;display: flex;">
+                            <ul style="list-style-type: none;display: flex;margin-top:30px;">
                                 <li><i class="ti-facebook"></i> <a href="< ?php echo FACEBOOK.$businessDetails['facebook_business']; ?>">Facebook</a></li>
                                 <li><i class="ti-instagram"></i> <a href="< ?php echo INSTAGRAM.$businessDetails['instagram_business']; ?>">Instagram</a></li>
                                 <li><i class="ti-twitter-alt"></i> <a href="< ?php echo TWITTER.$businessDetails['twitter_business']; ?>">Twitter</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="footer-widget" style="margin-left:25px;">
+                    <div class="col-lg-3 mb-3">
+                        <div class="footer-widget">
                             <h4>About Us</h4>
                             <p>Integer cursus scelerisque ipsum id efficitur. Donec a dui fringilla, 
                                 gravida lorem ac, semper magna. Aenean rhoncus ac lectus a interdum. 
@@ -29,12 +30,12 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="footer-widget" style="margin-left:45px;">
+                    <div class="col-lg-3 mb-3">
+                        <div class="footer-widget">
                             <h4>Opening Hours</h4>
                             <ul class="social">
                                 <li>
-                                    <span class="text-color">Monday: </span>Closed
+                                    <span class="text-color">Monday :</span>9:Am - 10PM
                                 </li>
                                 <li>
                                     <span class="text-color">Tue-Wed :</span>9:Am - 10PM
@@ -43,13 +44,16 @@
                                     <span class="text-color">Thu-Fri :</span> 9:Am - 10PM
                                 </li>
                                 <li>
-                                    <span class="text-color">Sat-Sun :</span> 5:PM - 10PM
+                                    <span class="text-color">Sat-Sat :</span> 5:PM - 10PM
+                                </li>
+                                <li>
+                                    <span class="text-color">Sunday: </span> Close
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="footer-widget pl-4" >
+                        <div class="footer-widget" >
                         <!-- style="float:left; margin-right:70px;" -->
                             <h4>Contact Us</h4>
                             <ul class="contact-option">
@@ -87,11 +91,12 @@
 <!-- Javascript files-->
 <!-- <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script> -->
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery-3.3.1.min.js"></script>
-<script src="<?php echo BASE_URL_LINK ;?>dist/js/owl.carousel.min.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/popper.min.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script> -->
 <!-- <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery-3.0.0.min.js"></script> -->
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery-ui.min.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>dist/js/owl.carousel.min.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.magnific-popup.min.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap4.min.js"></script>
@@ -108,6 +113,8 @@
 <script src="<?php echo BASE_URL_LINK ;?>js/craft_addcategories.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/likes.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/handmade_cart.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>js/profileEdit.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>js/manage_admin_db.js"></script>
 <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> 
 -->
 <script type="text/javascript">
@@ -183,7 +190,27 @@
 <!-- google map js -->
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script> -->
 <!-- end google map js --> 
+<script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
 
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
 </body>
 
 </html>

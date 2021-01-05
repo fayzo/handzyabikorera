@@ -366,6 +366,8 @@ class Users extends Db{
 
        $query= $mysqli->query($sql);
     //    var_dump($sql);
+    //     var_dump('ERROR: Could not able to execute'. $query.mysqli_error($mysqli));
+
        $i= 1;
        foreach ($fields as $key => $value) {
            # code...

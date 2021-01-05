@@ -30,6 +30,7 @@
     padding: 1px 0 0 0;
     border-top-width: 0;
     width: 280px;
+    font-size: 12px;
 }
 
 .user-menu> .dropdown-menu>li.user-header {
@@ -75,6 +76,7 @@
 .user-menu .dropdown-menu>.user-body a {
     color: #444 !important;
     text-decoration: none;
+    font-size: 12px;
 }
 .user-menu .dropdown-menu> .user-body:before, .user-menu .dropdown-menu>.user-body:after {
     content: " ";
@@ -91,7 +93,7 @@
 .user-menu .dropdown-menu>.user-footer {
     background-color: #f9f9f9;
     padding: 10px;
-    padding-bottom: 28px;
+    padding-bottom: 38px;
 }
 .user-menu .dropdown-menu>.user-footer:before, .user-menu .dropdown-menu>.user-footer:after {
     content: " ";

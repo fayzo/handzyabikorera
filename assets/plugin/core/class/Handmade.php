@@ -237,6 +237,68 @@ class Handmade extends Home {
             } 
     }
 
+    // THIS IS FOR CHECKOUT PAYMENT
+
+    public function Checkout_Craft_showCart_itemSale(){
+
+        if(isset($_SESSION["like_cart_item"])){
+                $total_quantitys = 0;
+                $total_price = 0;
+            // var_dump(count($_SESSION["like_cart_item"]));
+            ?>	
+            <table class="table table-responsive-sm table-hover table-bordered bg-light mb-0" id="foodshowcart">
+             <thead class="main-active">
+               <tr>
+               <th style="text-align:center;">Products</th>
+               <th style="text-align:center;">Price</th>
+               <th style="text-align:center;">Remove</th>
+			   </tr>	
+			 </thead>
+             <tbody>
+            <?php		
+                foreach ($_SESSION["like_cart_item"] as $item){
+                    $item_price = $item["quantitys"]*$item["price"];
+            		?>
+            		<tr>
+                    <td style="background: url('<?php echo BASE_URL ;?>uploads/craft/<?php echo $item["image"]; ?>')no-repeat center center;background-size:contain;height:80px;width:80px;position:relative">
+                    <div style="position:absolute;bottom:0px;left:0px;background-color:#0000006e;color:white;width: 100%;"><?php
+                    if (strlen($item["name"]) > 12) {
+                      echo $item["name"] = substr($item["name"],0,12).'..';
+                    }else{
+                      echo $item["name"];
+                    } ?></div>
+                    </td>
+            				<td align="right"><?php echo "$ ". number_format($item_price); ?></td>
+            				<td align="center">
+                                <form method="post" id="form-craft-cartitem<?php echo $item['code']; ?>remove" >
+                                         <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $item['user_id']; ?>" />
+                                        <input type="hidden" style="width:30px;" name="actions" value="remove" />
+                                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $item['code']; ?>" />
+                                        <a href="javascript:void(0);" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$item['code'].'remove'; ?>','<?php echo $item['code']; ?>');"><img src="<?php echo BASE_URL_LINK ;?>image/product-images/icon-delete.png" alt="Remove Item" /></a> 
+                                </form>
+                            </td>
+            				</tr>
+            				<?php
+            				$total_quantitys += $item["quantitys"];
+            				$total_price += ($item["price"]*$item["quantitys"]);
+            		}
+            		?>
+            
+            <tr>
+            <td>Total:</td>
+            <td align="right" colspan="1"><strong><?php echo "$ ".number_format($total_price); ?></strong></td>
+            </tr>
+            </tbody>
+            </table>		
+              <?php
+            } else {
+            ?>
+             <div class="no-records"></div>
+            <!-- <div class="no-records">Your Cart is Empty</div> -->
+            <?php 
+            } 
+    }
+
     public function FoodshowCart_itemNavbar(){
 
         if(isset($_SESSION["like_cart_item"])){
@@ -427,15 +489,7 @@ class Handmade extends Home {
 
                     <?php if(isset($_SESSION['key_craft'])){ if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ ;?>
                             <div class="overlay_hover">
-                                <form method="post" id="form-craft-cartitem<?php echo $craft['code']; ?>add">
-                                    <div style="display:inline-flex;" >
-                                        <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $user_id; ?>" />
-                                        <input type="hidden" style="width:30px;" name="actions" value="add" />
-                                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $craft['code']; ?>" />
-                                        <input type="hidden" class="form-control form-control-sm text-center mr-2" style="width:30px;" name="quantitys" value="1" size="2" readonly/>
-                                        <a class="add-bt" href="#" onclick="xxda('add','<?php echo 'form-craft-cartitem'.$craft['code'].'add'; ?>','<?php echo $craft['code']; ?>');" >+ Add to WatchList</a>
-                                    </div>
-                                </form>
+                                  <a class="add-bt" href="javascript:void(0)" id="craft-readmore" data-craft="<?php echo $craft['craft_id']; ?>"  >+ ADD TO CART</a>
                             </div>
                         <?php }else{ ;?>
                             <div class="overlay_hover">
@@ -447,7 +501,34 @@ class Handmade extends Home {
                                         <a class="add-bt" href="#" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$craft['code'].'remove'; ?>','<?php echo $craft['code']; ?>');" >remove Watch-list</a> 
                                 </form>
                             </div>
-                        <?php } } ;?>
+                        <?php } }else{ ?>
+                            <div class="overlay_hover">
+                                  <a class="add-bt" href="javascript:void(0)" id="craft-readmore" data-craft="<?php echo $craft['craft_id']; ?>"  >+ ADD TO CART</a>
+                            </div>
+                        <?php } ;?>
+                    <!-- < ?php if(isset($_SESSION['key_craft'])){ if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ ;?>
+                            <div class="overlay_hover">
+                                <form method="post" id="form-craft-cartitem< ?php echo $craft['code']; ?>add">
+                                    <div style="display:inline-flex;" >
+                                        <input type="hidden" style="width:30px;" name="user_id" value="< ?php echo $user_id; ?>" />
+                                        <input type="hidden" style="width:30px;" name="actions" value="add" />
+                                        <input type="hidden" style="width:30px;" name="code" value="< ?php echo $craft['code']; ?>" />
+                                        <input type="hidden" class="form-control form-control-sm text-center mr-2" style="width:30px;" name="quantitys" value="1" size="2" readonly/>
+                                        <a class="add-bt" href="#" onclick="xxda('add','< ?php echo 'form-craft-cartitem'.$craft['code'].'add'; ?>','< ?php echo $craft['code']; ?>');" >+ Add to WatchList</a>
+                                    </div>
+                                </form>
+                            </div>
+                        < ?php }else{ ;?>
+                            <div class="overlay_hover">
+                                <form method="post" id="form-craft-cartitem< ?php echo $craft['code']; ?>remove" >
+                                        <input type="hidden" style="width:30px;" name="user_id" value="< ?php echo $craft['user_id3_list']; ?>" />
+                                        <input type="hidden" style="width:30px;" name="craft_id" value="< ?php echo $craft['craft_id']; ?>" />
+                                        <input type="hidden" style="width:30px;" name="code" value="< ?php echo $craft['code']; ?>" />
+                                        <input type="hidden" style="width:30px;" name="actions" value="remove" />
+                                        <a class="add-bt" href="#" onclick="xxda('remove','< ?php echo 'form-craft-cartitem'.$craft['code'].'remove'; ?>','< ?php echo $craft['code']; ?>');" >remove Watch-list</a> 
+                                </form>
+                            </div>
+                        < ?php } } ;?> -->
                     
                     <!-- <div class="overlay_hover"> <a class="add-bt" href="product_detail3.php">+ Add to cart</a> </div> -->
                     </div>
@@ -747,6 +828,138 @@ class Handmade extends Home {
 
 
 <?php  }
+
+    public function craft_countAgentPOSTS($categories,$id)
+    {
+        $db =$this->database;
+        if($categories == 'Featured'){
+            # code...
+            $sql= $db->query("SELECT COUNT(*) FROM craft WHERE user_id3=$id");
+        }else {
+            # code...
+            $sql= $db->query("SELECT COUNT(*) FROM craft WHERE categories_craft ='$categories' AND user_id3=$id");
+        }
+        $row_post = $sql->fetch_array();
+        $total_post= array_shift($row_post);
+        $array= array(0,$total_post);
+        $total_posts= array_sum($array);
+        echo $total_posts;
+    }
+
+    
+    public function edit_delete_AgentCraft($variable,$id){ ?>
+
+        <table class="table table-responsive-sm table_adminLA table-hover ">
+            <thead class="main-active">
+                <tr>
+                    <th>N0</th>
+                    <th class="text-center">
+                        <i class="icon-people"></i>
+                    </th>
+                    <th>PRICE/PROPERTY</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php switch ($variable) {
+                case $variable :
+                    # code... ?>
+                    <?php 
+                            $increment= 1;
+                            $mysqli= $this->database;
+                            if($variable == 'Featured'){
+                                # code...
+                                $result= $mysqli->query("SELECT * FROM craft WHERE user_id3=$id ");
+                            }else {
+                                # code...
+                                $result= $mysqli->query("SELECT * FROM craft WHERE categories_craft= '$variable' AND user_id3=$id ");
+                            }
+                        if ($result->num_rows > 0) {
+                            while($row= $result->fetch_array()){ ?>
+                       <tr id="house_n<?php echo $row['craft_id']; ?>">
+                            <td><?php echo  $increment++ ; ?></td>
+                            <td class="text-center">
+                                <div class="avatar">
+                                    <?php
+                                    $file = $row['photo'];
+                                    $expode = explode("=",$file);  ?>
+                                    <img class="img-avatar" width="80px" 
+                                        src="<?php echo BASE_URL.'uploads/craft/'.$expode[0]; ?>" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <div><?php echo number_format($row['price']); ?> Frw 
+                                    </div>
+                                    <div> <?php echo $this->buychangesColor($row['buy']); ?></div>
+                                    <?php if($row['price_discount'] != 0){ ?>
+                                    <div class="text-danger price-change" style="text-decoration: line-through;">
+                                        <?php echo number_format($row['price_discount']); ?> Frw 
+                                    </div> 
+                                <?php } ?>
+                                <?php 
+                                    $subect = $row['categories_craft'];
+                                    $replace = " ";
+                                    $searching = "_";
+                                    echo str_replace($searching,$replace, $subect);
+                                ?>
+                                <div class="text-danger price-change"><?php echo $row['code']; ?></div>
+                            </td>
+                            <td>
+                                <!-- <input type="button" onclick="viewOReditHouses(< ?php echo $row['craft_id'];?>, 'EditHouseAdmin')" value="Edit" class="btn btn-primary">
+                                <input type="button" id="house-readmore" data-house="< ?php echo $row['craft_id']; ?>" value="View" class="btn">
+                                <input type="button" onclick="deleteRow(< ?php echo $row['craft_id'];?>,'deleteRowHouse')" value="Delete" class="btn btn-danger">
+                                 -->
+                                <div class="btn-group btn-group-sm">
+                                    <a href="javascript:void(0)" onclick="viewOReditHouses(<?php echo $row['craft_id'];?>, 'EditHouseAdmin')"   class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" id="house-readmore" data-house="<?php echo $row['craft_id']; ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="javascript:void(0)" onclick="deleteRow(<?php echo $row['craft_id'];?>,'deleteRowHouse')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </div>
+                                <!-- <div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </div> -->
+                            </td>
+                        </tr>
+                <?php 
+                     } }else{ 
+                       # code...  ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>No record</td>
+                            <td></td>
+                        </tr>
+                    <?php    }
+                break;
+            } ?>
+                    </tbody>
+                </table>
+
+<?php   }
+
+    public function buychangesColor($variable){
+
+        switch ($variable) {
+
+            case $variable == 'sold' :
+                # code...
+                return '<span class="bg-danger p-1 text-light require" > '.$variable.' </span> ';
+                break;
+
+            case $variable == 'sale' :
+                # code...
+                return '<span class="bg-success p-1 text-light require" >For '.$variable.' </span> ';
+                break;
+                
+            default:
+                # code...
+                echo '';
+                break;
+            }
+        }
+
+
 
     
 }

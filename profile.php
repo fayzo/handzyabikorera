@@ -8,7 +8,7 @@
     <section class="property-section spad">
 
         <div class="container">
-            <div class="row mb-2">
+            <div class="row py-3 mb-2">
             <div class="col-sm-6">
                 <h1>Profile</h1>
             </div>
@@ -29,7 +29,7 @@
 
             <!-- Profile Image -->
             <div class="card bg-light">
-                <div class="card-header text-muted border-bottom-0">
+                <div class="card-header border-bottom-0">
                   Real Estate Agent
                 </div>
                 <div class="card-body">
@@ -78,7 +78,7 @@
               </div>
 
               <div class="card bg-light mt-3">
-              <div class="card-header text-muted border-bottom-0">
+              <div class="card-header border-bottom-0">
                 About Me
               </div>
               <!-- /.card-header -->

@@ -23,20 +23,20 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '#food-readmore', function (e) {
+    $(document).on('click', '#craft-readmore', function (e) {
         e.stopPropagation();
-        var food_id = $(this).data('food');
+        var craft_id = $(this).data('craft');
 
         $.ajax({
-            url: 'core/ajax_db/food_readmores.php',
+            url: 'core/ajax_db/craft_readmore.php',
             method: 'POST',
             dataType: 'text',
             data: {
-                food_id: food_id,
+                craft_id: craft_id,
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".food-popup").hide();
+                    $(".craft-popup").hide();
                 });
                 console.log(response);
             }

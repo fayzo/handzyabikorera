@@ -12,6 +12,7 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/responsive.css">
     <!-- icon -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/themify-icons.css" type="text/css">
@@ -26,6 +27,7 @@
     <!-- <link rel="stylesheet" href="< ?php echo BASE_URL_LINK;?>assets/css/responsive.bootstrap4.min.css" type="text/css" > -->
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/imagePopup.css" type="text/css">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/profile.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/form-validation.css">
     
     <!-- <link rel="stylesheet" href="< ?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css"> -->
     

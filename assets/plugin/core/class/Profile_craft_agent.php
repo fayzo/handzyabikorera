@@ -15,6 +15,7 @@ class Profile_craft_agent extends Handmade {
                     <div class="col-lg-12">
                         <nav class="main-menu">
                             <ul class="nav nav-pills">
+                            <!-- <ul class="nav nav-pills"> -->
                                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="javascript:" onclick="craft_agentCategories('Featured',1,<?php echo $user_id ; ?>);">Featured<span class="badge badge-primary"><?php echo $this->Profile_craft_agentcountPOSTS('Featured',$user_id);?></span></a></li>
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="javascript:void(0)" onclick="craft_agentCategories('Arts',1,<?php echo $user_id ; ?>);">Arts<span class="badge badge-primary"><?php echo $this->Profile_craft_agentcountPOSTS('Arts',$user_id);?></span></a></li>
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="javascript:void(0)" onclick="craft_agentCategories('Wood_Craft',1,<?php echo $user_id ; ?>);">Wood Craft<span class="badge badge-primary"><?php echo $this->Profile_craft_agentcountPOSTS('Wood_Craft',$user_id);?></span></a></li>

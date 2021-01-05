@@ -1,18 +1,14 @@
-<?php include "header_if_login.php"?>
+<!-- < ?php include "header_if_login.php"?> -->
+<?php include "Get_usernameProfile.php"?>
 <?php include "header.php"?>
-    
-<!-- <body> -->
-<body >
 <!-- <body class="chair"> -->
-    <div class="content">
-    <?php include "navbar.php"?>
-    <!-- navbar -->
-    
+<?php include "navbar.php" ?>
+
     <!-- Property Section Begin -->
     <section class="property-section spad">
 
         <div class="container">
-            <div class="row mb-2">
+            <div class="row py-2 mb-2">
             <div class="col-sm-6">
                 <h1>Profile Edit</h1>
             </div>
@@ -73,7 +69,7 @@
 
                               <label for="firstname">Firstname :</label>
                               <input type="hidden" name="id_career" id="id_career"
-                              value="<?php echo $_SESSION['key'];?>" style="display:none" />
+                              value="<?php echo $_SESSION['key_craft'];?>" style="display:none" />
                               <div class="input-group mb-3">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i>
@@ -165,6 +161,8 @@
                   <div class="card-body">
                       <form method="post">
                           <div class="form-group">
+                          <input type="hidden" name="id_aboutMe" id="id_aboutMe"
+                              value="<?php echo $_SESSION['key_craft'];?>" style="display:none" />
 
                               <label for="location"><strong><i class="fa fa-map-marker mr-1"></i>
                                       Location</strong> :</label>
@@ -203,7 +201,7 @@
                                       aria-describedby="helpId" value="<?php echo $user['notes'] ;?>"
                                       placeholder='studying ,played ,Dance ,Read.....'>
                               </div>
-                              <!-- <a href="javascript:void(0);" data-user="< ?php echo $_SESSION['key']; ?>" class="profile-edit-more float-right">Edit more</a> -->
+                              <!-- <a href="javascript:void(0);" data-user="< ?php echo $_SESSION['key_craft']; ?>" class="profile-edit-more float-right">Edit more</a> -->
                               <hr>
                           </div> <!-- FORM-GROUP -->
                           <button type="button" onclick="aboutMe('aboutme');" class="btn main-active btn-block"><b>Submit</b></button>
@@ -219,71 +217,72 @@
           <div class="col-md-9">
             <div class="card  mb-3">
                 <div class="card-header">
-                    <div class="card-tools pull-right">
+                    <!-- <div class="card-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
-                    </div>
+                    </div> -->
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link  active" href="#House_For_sale"
-                            data-toggle="tab">House For sale
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('House_For_sale',$user_id);?></span>
+                        <li class="nav-item"><a class="nav-link  active" href="#Featured"
+                            data-toggle="tab">Featured
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Featured',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#House_For_rent"
-                            data-toggle="tab">House For rent
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('House_For_rent',$user_id);?></span>
+                        <li class="nav-item"><a class="nav-link" href="#Arts"
+                            data-toggle="tab">Arts
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Arts',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#House_Land"
+                        <li class="nav-item"><a class="nav-link" href="#Wood_Craft"
                             data-toggle="tab">House Land
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('House_Land',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Wood_Craft',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#Apartment_For_sale"
+                        <li class="nav-item"><a class="nav-link" href="#Jewellery"
                             data-toggle="tab">apartment For Sale
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('Apartment_For_sale',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Jewellery',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#Apartment_For_rent"
+                        <li class="nav-item"><a class="nav-link" href="#Homeware"
                             data-toggle="tab">apartment For Rent
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('Apartment_For_rent',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Homeware',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#room_For_rent"
+                        <li class="nav-item"><a class="nav-link" href="#Clothing"
                             data-toggle="tab">room
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('room_For_rent',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Clothing',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#commerce_For_rent"
+                        <li class="nav-item"><a class="nav-link" href="#Shoes"
                             data-toggle="tab">Commerce
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('commerce_For_rent',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Shoes',$user_id);?></span>
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#Offices_For_rent"
+                        <li class="nav-item"><a class="nav-link" href="#Accessories"
                             data-toggle="tab">Office
-                            <span class="badge badge-primary"><?php echo $house->housecountAgentPOSTS('Offices_For_rent',$user_id);?></span>
+                            <span class="badge badge-primary"><?php echo $handmade->craft_countAgentPOSTS('Accessories',$user_id);?></span>
                         </a></li>
                     </ul>
                     <!-- </div> -->
+
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane active " id="House_For_sale">
-                            <?php echo $house->edit_delete_Agentproperty('House_For_sale',$user_id); ?>
+                        <div class="tab-pane active " id="Featured">
+                            <?php echo $handmade->edit_delete_AgentCraft('Featured',$user_id); ?>
                         </div> 
-                        <div class="tab-pane" id="House_For_rent">
-                            <?php echo $house->edit_delete_Agentproperty('House_For_rent',$user_id); ?>
+                        <div class="tab-pane" id="Arts">
+                            <?php echo $handmade->edit_delete_AgentCraft('Arts',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="House_Land">
-                        <?php echo $house->edit_delete_Agentproperty('House_Land',$user_id); ?>
+                        <div class="tab-pane" id="Wood_Craft">
+                        <?php echo $handmade->edit_delete_AgentCraft('Wood_Craft',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="Apartment_For_rent">
-                        <?php echo $house->edit_delete_Agentproperty('Apartment_For_rent',$user_id); ?>
+                        <div class="tab-pane" id="Homeware">
+                        <?php echo $handmade->edit_delete_AgentCraft('Homeware',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="Apartment_For_sale">
-                        <?php echo $house->edit_delete_Agentproperty('Apartment_For_sale',$user_id); ?>
+                        <div class="tab-pane" id="Jewellery">
+                        <?php echo $handmade->edit_delete_AgentCraft('Jewellery',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="room_For_rent">
-                        <?php echo $house->edit_delete_Agentproperty('room_For_rent',$user_id); ?>
+                        <div class="tab-pane" id="Clothing">
+                        <?php echo $handmade->edit_delete_AgentCraft('Clothing',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="commerce_For_rent">
-                        <?php echo $house->edit_delete_Agentproperty('commerce_For_rent',$user_id); ?>
+                        <div class="tab-pane" id="Shoes">
+                        <?php echo $handmade->edit_delete_AgentCraft('Shoes',$user_id); ?>
                         </div>
-                        <div class="tab-pane" id="Offices_For_rent">
-                        <?php echo $house->edit_delete_Agentproperty('Offices_For_rent',$user_id); ?>
+                        <div class="tab-pane" id="Accessories">
+                        <?php echo $handmade->edit_delete_AgentCraft('Accessories',$user_id); ?>
                         </div>
                     </div> <!-- /.tab-content -->
                 </div>
@@ -303,4 +302,6 @@
     <!-- Property Section End -->
 
     
+    <?php include "user_admin.php"?>
+    <?php include "admin_message.php"?>
     <?php include "footer.php"?>
