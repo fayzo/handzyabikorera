@@ -132,7 +132,7 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 				'phone_client'=> $data['phone_client'], 
 				'message_client'=> $data['message_client'],
 			);
-			$notification->business_messageView($data['message_id']);
+			// $notification->business_messageView($data['message_id']);
 			exit(json_encode($jsonArrays));
 		 }
 			 

@@ -223,3 +223,64 @@
             </div>
         </div>
  </div>
+
+ 
+
+ <div class="well" style="margin:auto; padding:auto; width:80%;">
+        <div id="manage_admin_form1" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">FORM </h2>
+                    </div>
+                    <div class="modal-body">
+                     <div id="editContent_admin_customer_review">
+                     <div id="responseAdmins_review"></div>
+                         <div class="form-group">
+                            <input type="hidden" id="editRowID_review" value="0">
+                            <label for="firstName">Name</label>
+                            <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon2"><i
+                                              class="fa fa-user"></i></span>
+                                  </div>
+                                    <input type="text" name="name_admin" class="form-control" id="name_admin" placeholder="firstName" required>
+                            </div>
+                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                            <div class="input-group">
+                               <div class="input-group-prepend">
+                                 <span class="input-group-text">@</span>
+                               </div>
+                               <input type="email" class="form-control" id="email_admin0" placeholder="you@example.com" required>
+                            </div>
+            
+                            <label for="specialize">message :</label>
+                                  <textarea name="message_admin" id="message_admin" cols="20" class="form-control" rows="10"></textarea>
+                          </div> 
+                        </div> <!-- THIS IS EDIT-CONTENT -->
+
+                      
+                      <!-- END OF UPLOAD IMAGE CONTENT -->
+
+                        <div id="showContent_admin_customer_review" style="display:none;">
+
+                            <p><span style="font-weight:bold;font-size:17px;">Name : </span>
+                            <span id="nameView_review"></span> </p>
+                            <hr>
+                            <p><span style="font-weight:bold;font-size:17px;">Email : </span>
+                            <span id="emailViewz_review"></span> </p>
+                            <hr>
+                            <p><span style="font-weight:bold;font-size:17px;">Message : </span>
+                            <span id="messageViewz_review"></span> </p>
+                        </div>
+                     </div> <!-- THIS IS MODAL BODY -->
+
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="Close" id="closeBtn2" >
+                        <input type="button" id="button_admin0" onclick="ajax_requests_customer_review_('add_admin');" value="Save" class="btn btn-success">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+ </div>

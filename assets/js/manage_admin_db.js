@@ -309,6 +309,127 @@
     }
 
 
+    // CUSTOMER REVIEWS
+
+    
+    function viewOReditReviews(rowID, type) {
+        $.ajax({
+            url: 'core/ajax_db/customer_review_viewORedit',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                key: type,
+                rowID: rowID
+            }, success: function (response) {
+                if (type == "viewORedit" || type == "agent_message_view") {
+
+                    $("#showContent_admin_customer_review").fadeIn();
+                    $("#editContent_admin_customer_review").fadeOut();
+                    $("#nameView_review").html(response.name);
+                    $("#emailViewz_review").html(response.email);
+                    $("#messageViewz_review").html(response.message);
+                    $("#closeBtn2").fadeIn();
+                    $("#button_admin0").fadeOut();
+
+                }else {
+                    $("#editContent_admin_customer_review").fadeIn();
+                    $("#showContent_admin_customer_review").fadeOut();
+                    $("#editRowID_review").val(rowID);
+                    $("#name_admin").val(response.name);
+                    $("#email_admin0").val(response.email);
+                    $("#message_admin").val(response.message);
+                    $("#button_admin0").attr('value', 'update').attr('onclick', "ajax_requests_CUSTOMER_REVIEWS_('update_Row')").fadeIn();
+                    $("#closeBtn2").fadeIn();
+                    $("#button_admin0").fadeIn();
+
+                }
+                $(".modal-title").html(response.name);
+                $("#manage_admin_form1").modal('show');
+            }
+        });
+    }
+
+    
+    function ajax_requests_CUSTOMER_REVIEWS_(key) {
+        var editRowID = $("#editRowID_review");
+        var name = $("#name_admin");
+        var email = $("#email_admin0");
+        var message = $("#message_admin");
+
+    $.ajax({
+        url: 'core/ajax_db/customer_review_viewORedit',
+        method: "POST",
+        dataType: "text",
+        data: {
+            key: key,
+            rowID: editRowID.val(),
+            name: name.val(),
+            email : email.val(),
+            message : message.val(),
+        },
+            success: function (response) {
+                if (response != "success"){
+                       alert('Fail');
+                } else {
+                    $("#responseAdmins_review").html(response);
+
+                }
+                    // console.log(response);
+               }
+            });
+        }
+
+    
+    function deleteRow_CUSTOMER_REVIEWS_(rowID,key) {
+        if (confirm('Are you sure?')) {
+            $.ajax({
+                url: 'core/ajax_db/customer_review_viewORedit',
+                method: 'POST',
+                dataType: 'text',
+                data: {
+                    key: key,
+                    rowID: rowID
+                }, success: function (response) {
+                    if (key == "deleteRow") {
+                        $("#firstname"+rowID).parent().remove();
+                        alert(response);
+                    }else if (key == "deleteRowHouse") {
+                        $("#reviews_n"+rowID).remove();
+                        // $("#house_n"+rowID).last().remove();
+                        $("#responseHouseD").html(response);
+
+                    }
+                    // setInterval(() => {
+                    //     // window.location = '../index';
+                    //     location.reload();
+                    // }, 2500);
+                }
+            });
+        }
+    }
+
+    
+    function approvedReview_CUSTOMER_REVIEWS_(rowID,approval) {
+        if (confirm('Are you sure??')) {
+            $.ajax({
+                url: 'core/ajax_db/customer_review_viewORedit',
+                method: 'POST',
+                dataType: 'text',
+                data: {
+                    key: approval,
+                    rowID: rowID
+                }, success: function (response) {
+                    $("#approvalReview"+rowID).html(approval);
+                    alert(response);
+                    // setInterval(() => {
+                    //     // window.location = '../index';
+                    //     location.reload();
+                    // }, 2500);
+                }
+            });
+        }
+    }
+    
                 
         
                 

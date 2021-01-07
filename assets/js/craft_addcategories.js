@@ -163,6 +163,114 @@ $(document).ready(function () {
             }
         }
     });
+    
+
+    $(document).on('click', '#submit_clientToAgent', function (e) {
+        e.preventDefault();
+        var form_id = $('#form_agentMessage');
+        // e.stopPropagation();
+        var name = $('#name_clientToAgent');
+        var email = $('#email_clientToAgent');
+        // var phone = $('#phone_clientToAgent');
+        var message = $('#message_clientToAgent');
+        
+        if (isEmpty(message) && isEmpty(name) && isEmpty(email)) {
+         
+            $.ajax({
+                    url: 'core/ajax_db/craft_readmore',
+                    method: "POST",
+                    data: form_id.serialize(),
+                    success: function (response) {
+                        $("#responseAgentMessage").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseAgentMessage").fadeOut();
+                        }, 2500);
+                        setInterval(function () {
+                            window.location.reload();
+                            // location.reload();
+                        }, 2800);
+                    }, error: function (response) {
+                        $("#responseAgentMessage").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseAgentMessage").fadeOut();
+                        }, 3000);
+                    }
+                });
+                return false;
+          
+            }
+    });
+
+    $(document).on('click', '#customer_review_client', function (e) {
+        e.preventDefault();
+        var form_id = $('#form_Message');
+        // e.stopPropagation();
+        var name = $('#name_client');
+        var email = $('#email_client');
+        var message = $('#message_client');
+        
+        if (isEmpty(message) && isEmpty(name) && isEmpty(email) ) {
+         
+            $.ajax({
+                    url: 'core/ajax_db/craft_readmore',
+                    method: "POST",
+                    data: form_id.serialize(),
+                    success: function (response) {
+                        $("#responseMessage").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseMessage").fadeOut();
+                        }, 2500);
+                        setInterval(function () {
+                            window.location.reload();
+                            // location.reload();
+                        }, 2800);
+                    }, error: function (response) {
+                        $("#responseMessage").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseMessage").fadeOut();
+                        }, 3000);
+                    }
+                });
+                return false;
+          
+            }
+    });
+
+
+    
+    $(document).on('click', '#newslatter_form_submit', function (e) {
+        e.stopPropagation();
+        var email = $('#newslatter_email_client');
+        var form_id = $('#newslatter_form');
+
+        
+        if (isEmpty(email)) {
+         
+            $.ajax({
+                    url: 'core/ajax_db/craft_readmore',
+                    method: "POST",
+                    data: form_id.serialize(),
+                    success: function (response) {
+                        $("#responseNewslatter").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseNewslatter").fadeOut();
+                        }, 3500);
+                        setInterval(function () {
+                            window.location.reload();
+                            // location.reload();
+                        }, 3800);
+                    }, error: function (response) {
+                        $("#responseNewslatter").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseNewslatter").fadeOut();
+                        }, 3000);
+                    }
+                });
+                return false;
+          
+            }
+    });
+
 
     $(document).on('click', '.imagefoodViewPopup', function (e) {
         e.stopPropagation();
@@ -183,6 +291,47 @@ $(document).ready(function () {
         });
     });
 });
+
+
+function contact_business(key) {
+    var name_client_ = $("#name_client_0");
+    var email_client_ = $("#email_client_0");
+    var phone_client_ = $("#phone_client_0");
+    var messages_client_ = $("#messages_client_0");
+    //   use 1 or second method to validaton
+    if (isEmpty(name_client_) && isEmpty(email_client_) && isEmpty(phone_client_) &&  isEmpty(messages_client_)
+    ) {
+        //    alert("complete register");
+        $.ajax({
+            url: 'core/ajax_db/contact',
+            method: "POST",
+            dataType: "text",
+            data: {
+                key: key,
+                name_client_: name_client_.val(),
+                email_client_: email_client_.val(),
+                phone_client_: phone_client_.val(),
+                messages_client_: messages_client_.val(),
+            },
+            success: function(response) {
+                $("#responses").html(response);
+                // console.log(response);
+                if (response.indexOf('SUCCESS') >= 0) {
+                    setInterval(() => {
+                        window.location.reload();
+                        // location.reload();
+                    }, 1500);
+                }else {
+                   isEmptys(name_client_) || isEmptys(email_client_) 
+                }
+            }
+        });
+    }
+}
+
+
+
+
 
 function isEmpty(caller) {
     if (caller.val() == "") {

@@ -7,6 +7,9 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
     if (isset($_SESSION['key_craft'])) {
         # code...
         $user_id= $_SESSION['key_craft'];
+    }else {
+        $user_id= 0;
+        # code...
     }
     
     $craft_id = $_POST['craft_id'];
@@ -209,14 +212,18 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                                                     <div class="full">
 
                                                                         <div id="collapseExample0" class="full collapse commant_box">
-                                                                            <form accept-charset="UTF-8" action="index.html" method="post">
+                                                                            <form accept-charset="UTF-8" id="form_agentMessage" method="post">
                                                                                 <input id="ratings-hidden" name="rating" type="hidden">
-                                                                                <textarea class="shadow-form-control form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." required=""></textarea>
-                                                                                <input type="text" class="shadow-form-control form-control" id="name" name="name" placeholder="Your Name" required="" data-error="Please enter your name">
-                                                                                <input type="text" placeholder="Your Email" id="email" class="shadow-form-control form-control" name="name" required="" data-error="Please enter your email">
+                                                                                <input id="ratings-hidden" name="craft_id" type="hidden" value="<?php echo $craft['craft_id'] ;?>">
+                                                                                <input id="ratings-hidden" name="user_id" type="hidden" value="<?php echo $user_id;?>">
+                                                                                
+                                                                                <textarea class="shadow-form-control form-control animated" cols="50" id="message_clientToAgent" name="message_clientToAgent" placeholder="Enter your review here..." required=""></textarea>
+                                                                                <input type="text" class="shadow-form-control form-control" id="name_clientToAgent" name="name_clientToAgent" placeholder="Your Name" required="" data-error="Please enter your name">
+                                                                                <input type="text" placeholder="Your Email" id="email_clientToAgent" class="shadow-form-control form-control" name="email_clientToAgent" required="" data-error="Please enter your email">
 
                                                                                 <div class="full_bt center">
-                                                                                    <button class="bt_main" type="submit">Save</button>
+                                                                                    <span id="responseAgentMessage"></span>
+                                                                                    <button class="bt_main" id="submit_clientToAgent" type="button">Save</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -440,6 +447,23 @@ if(isset($_POST['contacts_agent'])){
     
     <?php } 
 
+if (isset($_POST['name_client']) && !empty($_POST['name_client'])) {
+    $datetime= date('Y-m-d H-i-s');
+
+    $name = $users->test_input($_POST['name_client']);
+    $email = $users->test_input($_POST['email_client']);
+    $message = $users->test_input($_POST['message_client']);
+    // echo var_dump($_POST);
+
+	$users->Postsjobscreates('customers_reviews',array( 
+	'name_review'=> $name,
+	'email_review'=> $email, 
+	'message_review'=> $message, 
+    'approval_Review'=> 'on',
+    'datetime'=> $datetime 
+        ));
+} 
+
 if (isset($_POST['name_clientToAgent']) && !empty($_POST['name_clientToAgent'])) {
     $user_id= $_POST['user_id'];
     $craft_id= $_POST['craft_id'];
@@ -447,17 +471,16 @@ if (isset($_POST['name_clientToAgent']) && !empty($_POST['name_clientToAgent']))
 
     $name = $users->test_input($_POST['name_clientToAgent']);
     $email = $users->test_input($_POST['email_clientToAgent']);
-    $phone = $users->test_input($_POST['phone_clientToAgent']);
+    // $phone = $users->test_input($_POST['phone_clientToAgent']);
     $message = $users->test_input($_POST['message_clientToAgent']);
     // echo var_dump($_POST);
 
 	$users->Postsjobscreates('agent_message',array( 
 	'name_client'=> $name,
 	'email_client'=> $email, 
-	'phone_client'=> $phone, 
 	'message_client'=> $message, 
     'user_id3'=> $user_id,
-    'house_id_msg'=> $craft_id,
+    'craft_id_msg'=> $craft_id,
     'datetime'=> $datetime 
         ));
 } 
@@ -466,7 +489,7 @@ if (isset($_POST['name_clientToAgent']) && !empty($_POST['name_clientToAgent']))
 if (isset($_POST['newslatter_email_client']) && !empty($_POST['newslatter_email_client'])) {
     $email = $users->test_input($_POST['newslatter_email_client']);
 
-    require '../../newsletters_thank_.php';
+    // require '../../newsletters_thank_.php';
     $datetime= date('Y-m-d H-i-s');
 
 	$users->Postsjobscreates('client_subscribe_email',array( 

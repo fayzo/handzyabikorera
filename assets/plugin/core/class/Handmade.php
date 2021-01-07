@@ -807,15 +807,16 @@ class Handmade extends Home {
             <div class="full">
 
                 <div id="collapseExample" class="full commant_box collapse">
-                    <form accept-charset="UTF-8" action="index.html" method="post">
+                    <form accept-charset="UTF-8" id="form_Message" method="post">
                         <input id="ratings-hidden" name="rating" type="hidden">
                         
-                        <textarea class="shadow-form-control form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." required=""></textarea>
-                        <input type="text" class="shadow-form-control form-control" id="name" name="name" placeholder="Your Name" required="" data-error="Please enter your name">
-                        <input type="text" placeholder="Your Email" id="email" class="shadow-form-control form-control" name="name" required="" data-error="Please enter your email">
+                        <textarea class="shadow-form-control form-control animated" cols="50" id="message_client" name="message_client" placeholder="Enter your review here..." required=""></textarea>
+                        <input type="text" class="shadow-form-control form-control" id="name_client" name="name_client" placeholder="Your Name" required="" data-error="Please enter your name">
+                        <input type="text" placeholder="Your Email" id="email_client" class="shadow-form-control form-control" name="email_client" required="" data-error="Please enter your email">
 
                         <div class="full_bt center">
-                            <button class="bt_main" type="submit">Save</button>
+                            <span id="responseMessage"></span>
+                            <button class="bt_main" id="customer_review_client" type="button" >Save</button>
                         </div>
                     </form>
                 </div>
@@ -1172,7 +1173,7 @@ class Handmade extends Home {
                                 $file = $row['photo'];
                                 $expode = explode("=",$file);  ?>
                                 <img class="img-avatar" width="80px" 
-                                    src="<?php echo BASE_URL.'uploads/house/'.$expode[0]; ?>" alt="">
+                                    src="<?php echo BASE_URL.'uploads/craft/'.$expode[0]; ?>" alt="">
                             </div>
                         </td>
                         <td><?php echo $row['name_client']; ?></td>
@@ -1182,7 +1183,7 @@ class Handmade extends Home {
                             <div> <?php echo $row['phone_client']; ?></div>
                         </td>
                         <td><div><?php echo $this->timeAgo($row['datetime']); ?></div>
-                            <input type="button" onclick="business_msg(<?php echo $row['message_id'];?>, 'agent_message_view')" value="View" class="btn">
+                            <input type="button" onclick="viewOReditReviews(<?php echo $row['message_id'];?>, 'agent_message_view')" value="View" class="btn">
                             <input type="button" onclick="deleteRowHouse(<?php echo $row['message_id'];?>, 'agent_message_delete')" value="Delete" class="btn btn-danger">
                         </td>
                     </tr>
@@ -1255,6 +1256,130 @@ class Handmade extends Home {
     </table>
 
     <?php   }
+
+    public function Customers_Reviews(){ ?>
+
+
+        <table class="table table-responsive-sm table_adminLA4 table-hover ">
+                <thead class="main-active">
+                    <tr>
+                        <th>N0</th>
+                        <th class="text-center">
+                            <i class="icon-people"></i>
+                        </th>
+                        <th>name / email</th>
+                        <th>Message reviews</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php 
+                            $increment= 1;
+                            $mysqli= $this->database;
+                            $result= $mysqli->query("SELECT * FROM customers_reviews ");
+
+                        if ($result->num_rows > 0) {
+                            while($row= $result->fetch_array()){ ?>
+                        <tr id="reviews_n<?php echo $row['reviews_id']; ?>">
+                            <td><?php echo  $increment++ ; ?></td>
+                            <td class="text-center">
+                                <div class="avatar">
+                                    <img class="img-avatar" width="80px" 
+                                        src="<?php echo BASE_URL.'assets/image/img/quotations-button.png' ; ?>">
+                                </div>
+                            </td>
+                            <td>
+                                <div><?php echo $row['name_review']; ?> </div>
+                                    <div> <?php echo $row['email_review'] ; ?></div>
+                                <div>Approval: <span id="approvalReview<?php echo $row["Review_id"] ;?>"><?php echo $row["approval_Review"];?></span></div> 
+                            </td>
+                            <td>
+                                <div> <?php echo $row['message_review'] ; ?></div>
+                            </td>
+                            <td>
+                                <input type="button" onclick="viewOReditReviews(<?php echo $row['reviews_id'];?>, 'Edit')" value="Edit" class="btn btn-primary">
+                                <input type="button" onclick="viewOReditReviews(<?php echo $row['reviews_id'];?>, 'viewORedit')" value="view" class="btn btn-success">
+                                <input type="button" onclick="deleteRow_CUSTOMER_REVIEWS_(<?php echo $row['reviews_id'];?>,'deleteRow')" value="Delete" class="btn btn-danger">
+                                <input type="button" onclick="approvedReview_CUSTOMER_REVIEWS_(<?php echo $row['reviews_id'];?>, 'off')" value="off" class="btn btn-warning btn-sm ">
+                                <input type="button" onclick="approvedReview_CUSTOMER_REVIEWS_(<?php echo $row['reviews_id'];?>, 'on')" value="on" class="btn btn-success btn-sm">
+                            </td>
+                        </tr>
+                <?php 
+                        } }else{ 
+                        # code...  ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>No record</td>
+                            <td></td>
+                        </tr>
+                    <?php    }  ?>
+
+            </tbody>
+        </table>
+
+    <?php  } 
+
+    public function Banners_of_discount(){ ?>
+
+        <table class="table table-responsive-sm table_adminLA5 table-hover ">
+                <thead class="main-active">
+                    <tr>
+                        <th>N0</th>
+                        <th class="text-center">
+                            <i class="icon-people"></i>
+                        </th>
+                        <th>Discount banner</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php 
+                            $increment= 1;
+                            $mysqli= $this->database;
+                            $result= $mysqli->query("SELECT * FROM banners_discount");
+
+                        if ($result->num_rows > 0) {
+                            while($row= $result->fetch_array()){ ?>
+                        <tr id="reviews_n<?php echo $row['banner_id']; ?>">
+                            <td><?php echo  $increment++ ; ?></td>
+                            <td class="text-center">
+                                <div class="avatar">
+                                    <img class="img-avatar" width="80px" 
+                                        src="<?php echo BASE_URL.'assets/image/img/quotations-button.png' ; ?>">
+                                </div>
+                            </td>
+                            <td>
+                                <div><?php echo $row['title_banner']; ?> </div>
+                                    <div> <?php echo $row['discount_banner'] ; ?></div>
+                                <div>Approval: <span id="approvalBanner<?php echo $row["banner_id"] ;?>"><?php echo $row["approval_banner"];?></span></div> 
+                            </td>
+                            <td>
+                                <input type="button" onclick="viewOReditReviews(<?php echo $row['banner_id'];?>, 'EditHouseAdmin')" value="Edit" class="btn btn-primary">
+                                <input type="button" onclick="deleteRow(<?php echo $row['banner_id'];?>,'deleteRowHouse')" value="Delete" class="btn btn-danger">
+                                <input type="button" onclick="approvedBanner(<?php echo $row['banner_id'];?>, 'off')" value="off" class="btn btn-warning btn-sm ">
+                                <input type="button" onclick="approvedBanner(<?php echo $row['banner_id'];?>, 'on')" value="on" class="btn btn-success btn-sm">
+                            </td>
+                        </tr>
+                <?php 
+                        } }else{ 
+                        # code...  ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>No record</td>
+                            <td></td>
+                        </tr>
+                    <?php    }  ?>
+
+            </tbody>
+        </table>
+
+
+
+    <?php  }
 
 
 

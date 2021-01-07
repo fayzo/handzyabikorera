@@ -5,7 +5,7 @@
 <?php include "navbar.php" ?>
     
     <!-- Property Section Begin -->
-    <section class="property-section spad">
+    <section class="property-section spad" style="background-color: #c4c4c4;">
 
         <div class="container">
             <div class="row py-3 mb-2">

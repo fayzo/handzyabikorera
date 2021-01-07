@@ -100,7 +100,7 @@ class Profile_craft_agent extends Handmade {
                             
                             if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ 
                                 
-                                    if($_SESSION['key'] == $craft['user_id3']   ){ ;?>
+                                    if($_SESSION['key_craft'] == $craft['user_id3']   ){ ;?>
                                     <div class="overlay_hover">
                                         <form method="post" id="form-craft-cartitem<?php echo $craft['code']; ?>remove"  class="float-right" >
                                                 <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $craft['user_id3_list']; ?>" />

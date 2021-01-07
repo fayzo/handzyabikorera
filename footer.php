@@ -14,7 +14,7 @@
                                     <img src="<?php echo BASE_URL_LINK ;?>images/logo.jpg">
                                 </a>
                             </div>
-                            <ul style="list-style-type: none;display: flex;margin-top:30px;">
+                            <ul style="list-style-type: none;display: flex;margin-top:30px;margin-bottom:30px;">
                                 <li><i class="ti-facebook"></i> <a href="< ?php echo FACEBOOK.$businessDetails['facebook_business']; ?>">Facebook</a></li>
                                 <li><i class="ti-instagram"></i> <a href="< ?php echo INSTAGRAM.$businessDetails['instagram_business']; ?>">Instagram</a></li>
                                 <li><i class="ti-twitter-alt"></i> <a href="< ?php echo TWITTER.$businessDetails['twitter_business']; ?>">Twitter</a></li>
@@ -115,6 +115,7 @@
 <script src="<?php echo BASE_URL_LINK ;?>js/handmade_cart.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/profileEdit.js"></script>
 <script src="<?php echo BASE_URL_LINK ;?>js/manage_admin_db.js"></script>
+<script src="<?php echo BASE_URL_LINK ;?>js/checkout.js"></script>
 <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> 
 -->
 <script type="text/javascript">

@@ -179,6 +179,34 @@
                         </div>
                     </div>
 
+                    <h4 class="display-5 mb-2 text-center">Banners of discount </h4>
+                    
+                    <div class="card  mb-3">
+                        <div class="card-header">
+                            <div class="card-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link  active" href="#newsletter"
+                                        data-toggle="tab">Banners of discount</a> </li>
+                            </ul>
+                             <!-- /.card-tools -->
+                        </div>
+                        <div class="card-body">
+                        <div class="tab-content">
+                                <div class="tab-pane active " id="newsletter">
+                                    <?php echo $handmade->Banners_of_discount(); ?>
+                                </div> 
+                            </div> <!-- /.tab-content -->
+                        </div>
+                        <div class="card-footer text-muted">
+                            Footer
+                        </div>
+                    </div>
+
+
+                    <h4 class="display-5 mb-2 text-center">Members of Hand-made </h4>
 
                     <!-- CARD -->
                     <div class="card mb-3 ">
@@ -434,6 +462,32 @@
                         <div class="tab-content">
                                 <div class="tab-pane active " id="newsletter">
                                     <?php echo $handmade->newsletter_subscribe(); ?>
+                                </div> 
+                            </div> <!-- /.tab-content -->
+                        </div>
+                        <div class="card-footer text-muted">
+                            Footer
+                        </div>
+                    </div>
+
+                    <h4 class="display-5 mb-2 text-center">Customers Reviews </h4>
+                    
+                    <div class="card  mb-3">
+                        <div class="card-header">
+                            <div class="card-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link  active" href="#newsletter"
+                                        data-toggle="tab">Customers Reviews</a> </li>
+                            </ul>
+                             <!-- /.card-tools -->
+                        </div>
+                        <div class="card-body">
+                        <div class="tab-content">
+                                <div class="tab-pane active " id="newsletter">
+                                    <?php echo $handmade->Customers_Reviews(); ?>
                                 </div> 
                             </div> <!-- /.tab-content -->
                         </div>

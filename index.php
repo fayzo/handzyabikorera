@@ -190,16 +190,19 @@
                             </div>
                         </div>
                     </div>
-                    <form id="contact" action="" method="get">
+                    <form id="newslatter_form" method ="post" class="newslatter-form">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div id="responseNewslatter"></div>
+                            </div>
                             <div class="col-md-4 offset-3">
                                 <fieldset>
-                                    <input name="newsletter" type="text" class="form-control" id="newsletter" placeholder="Enter your email here..." required="">
+                                    <input  name="newslatter_email_client" id="newslatter_email_client"  type="text" class="form-control" placeholder="Enter your email here..." required="">
                                 </fieldset>
                             </div>
                             <div class="col-md-2">
                                 <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">Send Message</button>
+                                    <button type="submit" id="newslatter_form_submit" class="btn">Send Message</button>
                                 </fieldset>
                             </div>
                         </div>

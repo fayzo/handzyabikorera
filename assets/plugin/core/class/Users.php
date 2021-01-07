@@ -183,6 +183,7 @@ class Users extends Db{
         # Build the insert query
         $queryl = "INSERT INTO $table (".$columns.") VALUES (".$values.")";
         $query= $mysqli->query($queryl);
+
         // var_dump('ERROR: Could not able to execute'. $query.mysqli_error($mysqli));
 
         if($query){
