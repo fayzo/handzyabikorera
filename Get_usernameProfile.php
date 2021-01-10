@@ -43,7 +43,7 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
             // $notific= $notification->getNotificationCount($user_id);
 
             if(empty($_SESSION["like_cart_item"])) {
-                $productByCode = $users->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id ");
+                $productByCode = $users->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'off' ");
                 $TotalcodeByCode = $users->runQuery("SELECT COUNT(*) AS Totalcode  FROM craft_watchlist WHERE user_id3_list=$user_id ");
                 if (!empty($productByCode[0]["code_watchlist"])) {
                     # code...

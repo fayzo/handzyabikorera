@@ -140,13 +140,18 @@
                                             <!-- /.row -->
                                         </li>
                                         <!-- Menu Footer-->
-                                        <li class="user-footer main-active">
+                                        <li class="user-footer main-active row">
                                         <?php  if ($_SESSION['admin'] == 'admin') { ?>
-                                            <div class="pull-left">
+                                            <div class="pull-left col-4">
                                             <a href="<?php echo ADMIN; ?>" class="btn btn-info btn-sm">Admin</a>
                                             </div>
                                             <?php } ?>
-                                            <div class="pull-right">
+                                            <div class="pull-center col-4">
+                                            <!-- <a href="< ?php echo LOGOUT;?>" class="btn btn-danger btn-sm ">Sign out</a> -->
+                                            <a href="invoice_list" class="btn btn-success btn-sm ">Invoice</a>
+                                            <!-- <a href="< ?php echo LOGOUT; ?>" class="btn btn-danger btn-sm ">Sign out</a> -->
+                                            </div>
+                                            <div class="pull-right  col-4">
                                             <!-- <a href="< ?php echo LOGOUT;?>" class="btn btn-danger btn-sm ">Sign out</a> -->
                                             <a href="javascript:void(0)" id="logout-please" class="btn btn-danger btn-sm ">Sign out</a>
                                             <!-- <a href="< ?php echo LOGOUT; ?>" class="btn btn-danger btn-sm ">Sign out</a> -->

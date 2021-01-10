@@ -29,7 +29,7 @@ $mail->SMTPOptions = array(
 $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'house@iragiro.com';                 // SMTP username
-$mail->Password = 'rwanda1234@';                         // SMTP password
+$mail->Password = '';                         // SMTP password rwanda1234@das
 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 465;                                    // TCP port to connect to
 

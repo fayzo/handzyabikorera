@@ -93,7 +93,7 @@
 .user-menu .dropdown-menu>.user-footer {
     background-color: #f9f9f9;
     padding: 10px;
-    padding-bottom: 38px;
+    /* padding-bottom: 38px; */
 }
 .user-menu .dropdown-menu>.user-footer:before, .user-menu .dropdown-menu>.user-footer:after {
     content: " ";

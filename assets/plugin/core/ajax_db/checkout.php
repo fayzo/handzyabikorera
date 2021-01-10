@@ -4,6 +4,8 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 if(isset($_POST['cc-cvv'])){
 
 if ($_POST['cc-cvv']) {
+    
+    unset($_SESSION["like_cart_item"]);
 
     $datetime= date('Y-m-d H-i-s');
     
@@ -25,6 +27,20 @@ if ($_POST['cc-cvv']) {
     $cc_expiration_payment= $users->test_input($_POST['cc-expiration']);
     $cc_cvv_payment= $users->test_input($_POST['cc-cvv']);
 
+
+    $subect = $username.date("Y-m-d H:i:s").'_'.rand(10,1000);
+    $replace = "_";
+    $searching = " ";
+    $item_purchased = str_replace($searching,$replace, $subect);
+
+    $users->updateQuery('craft_watchlist',array(
+        'item_purchased_list'=> $item_purchased,  
+        'item_purchased_on'=> 'on',  
+    ),array(
+        'item_purchased_on'=> 'off',  
+        'user_id3_list' => $user_id,
+     ));  
+
 	$users->Postsjobscreates('checkout_payment',array( 
 
         'firstname' => $firstname,
@@ -44,8 +60,8 @@ if ($_POST['cc-cvv']) {
         'cc_expiration_payment' => $cc_expiration_payment,
         'cc_cvv_payment' => $cc_cvv_payment,
         'user_id3' => $user_id,
+        'item_purchased' => $item_purchased,
         'datetime' => $datetime,
-
         
     ));
 

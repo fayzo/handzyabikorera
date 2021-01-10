@@ -22,6 +22,7 @@ $(document).ready(function() {
                         }, 2000);
                         setInterval(function () {
                             // location.reload();
+                            window.location = 'invoice_list';
                         }, 2400);
                     }, error: function (response) {
                         $("#responseSubmit").html(response).fadeIn();
