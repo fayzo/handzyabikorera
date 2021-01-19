@@ -27,7 +27,7 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                 <div class="card-body">
                       <input type="hidden" name="user_id" value="<?php echo $user_id ;?>">
                            <div>Choose your location and categories </div>
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                           <div class="col">
                                 <label for="" class="text-dark">Province</label>
                                 <div class="input-group">
@@ -36,9 +36,9 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                                     </div>
                                     <select name="provincecode"  id="provincecode" onchange="showResult();" class="form-control provincecode">
                                         <option value="">----Select province----</option>
-                                        <?php while($show_province = mysqli_fetch_array($get_province)) { ?>
-                                        <option value="<?php echo $show_province['provincecode'] ?>"><?php echo $show_province['provincename'] ?></option>
-                                        <?php } ?>
+                                        < ?php while($show_province = mysqli_fetch_array($get_province)) { ?>
+                                        <option value="< ?php echo $show_province['provincecode'] ?>">< ?php echo $show_province['provincename'] ?></option>
+                                        < ?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -64,10 +64,10 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                                     </select>
                                 </div>
                             </div>
-                      </div>
+                      </div> -->
 
                       <div class="form-row mt-2">
-                            <div class="col">
+                            <!-- <div class="col">
                                 <label for="Cell" class="text-dark">Cell</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -89,7 +89,7 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                                           <option> </option>
                                       </select>
                                 </div>
-                            </div>
+                            </div> -->
                       
                       <div class="col">
                         <label for="">Seller</label>
@@ -131,9 +131,18 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                         <div class="col">
                           <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon2">code</span>
+                                <span class="input-group-text" id="basic-addon2">Product</span>
                             </div>
-                            <input type="text" class="form-control" name="code" id="code" placeholder="code of products Example nokia x94">
+                            <input type="text" class="form-control" name="product_name" id="product_name" placeholder="products">
+                          </div>
+                        </div>
+
+                        <div class="col">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon2">Stock</span>
+                            </div>
+                            <input type="number" class="form-control" name="stock" id="stock" value="1">
                           </div>
                         </div>
 
@@ -148,7 +157,12 @@ if (isset($_POST['craft_view']) && !empty($_POST['craft_view'])) {
                       </div>
 
                       <div class="form-group mt-2">
+                      <label >Description how it looks</label>
                         <textarea class="form-control" name="additioninformation" id="addition-information" placeholder="tell us you are product" rows="3"></textarea>
+                      </div>
+
+                      <span onclick="fundAddmoreHistory()" id="add-more" class="btn btn-primary btn-md ">+ add more</span>
+                      <div id="add-History">
                       </div>
 
                       <div class="form-row mt-2">
@@ -229,17 +243,26 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
       $youtube=  "";
     }
 
+    // $province =  $users->test_input($_POST['provincecode']);
+    // $districts =  $users->test_input($_POST['districtcode']);
+    // $cell =  $users->test_input($_POST['sectorcode']);
+    // $sector =  $users->test_input($_POST['codecell']);
+    // $village =  $users->test_input($_POST['CodeVillage']);
+
     $authors = $users->test_input($_POST['authors']);
     $additioninformation = $users->test_input($_POST['additioninformation']);
+    $additioninformation_History = $users->test_input($_POST['additioninformation_History']);
     $categories_craft=  $users->test_input($_POST['categories_craft']);
     $price = $users->test_input($_POST['price']);
     $phone = $users->test_input($_POST['phone']);
-     $province =  $users->test_input($_POST['provincecode']);
-    $districts =  $users->test_input($_POST['districtcode']);
-    $cell =  $users->test_input($_POST['sectorcode']);
-    $sector =  $users->test_input($_POST['codecell']);
-    $village =  $users->test_input($_POST['CodeVillage']);
-    $code = $users->test_input($_POST['code']);
+    $product_name = $users->test_input($_POST['product_name']);
+    
+    $subect = $product_name.'_'.rand(10,1000);
+    $replace = "_";
+    $searching = " ";
+    $code = str_replace($searching,$replace, $subect);
+
+    $stock = $users->test_input($_POST['stock']);
  
   if (!empty($_POST['photo-Titleo0'])) {
           $photo_Titleo=  $users->test_input($_POST['photo-Titleo0']);
@@ -289,29 +312,65 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                         <span>&times;</span>
                     </button>
                     <strong>The text is too long !!!</strong> </div>');
-		}
-
-	$users->Postsjobscreates('craft',array( 
+    }
+    
+	$users->creates('craft',array( 
 	'authors'=> $authors,
   'photo'=> $photo_, 
 	'code'=> $code,
-	'quantity'=> 1,
+	'product_name'=> $product_name,
+	'quantity'=> $stock,
 	'other_photo'=> $other_photo_, 
 	'video'=> $video_, 
-    'youtube'=> $youtube, 
-    'price'=> $price,
+  'youtube'=> $youtube, 
+  'price'=> $price,
 	'phone'=> $phone,
-    'country01'=> 'RW',
-    'photo_Title_main'=> $photo_Titleo,
-    'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
-	'province'=> $province,
-	'districts'=> $districts,
-	'sector'=> $sector,
-	'cell'=> $cell,
-	'village'=> $village,
+  'country01'=> 'RW',
+  'photo_Title_main'=> $photo_Titleo,
+  'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
+	'buy'=> 'sale',
   'text'=> $additioninformation,
+  'history_product'=> $additioninformation_History,
+  'stock'=> $stock,
   'categories_craft'=> $categories_craft,
   'user_id3'=> $user_id,
   'created_on3'=> $datetime ));
     }
-} ?> 
+
+  if (!empty($_POST['additioninformation_products'])) {
+      // $craft_id= $_POST['craft_id'];
+      $craft_id= $users->Last_insert_id('craft','craft_id');
+      $datetime= date('Y-m-d H-i-s');
+      $user_id= $_POST['user_id'];
+      $name = $authors;
+      $email = $_SESSION['email'];
+      $message = $users->test_input($_POST['additioninformation_products']);
+      // echo var_dump($_POST);
+  
+    $users->Postsjobscreates('agent_message',array( 
+    'name_client'=> $name,
+    'email_client'=> $email, 
+    'message_client'=> $message, 
+    'user_id3_msg'=> $user_id,
+    'craft_id_msg'=> $craft_id,
+    'datetime'=> $datetime 
+
+      ));
+  }else{
+    exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>SUCCESS</strong> </div>');
+  }
+
+} 
+
+
+// 'province'=> $province,
+	// 'districts'=> $districts,
+	// 'sector'=> $sector,
+	// 'cell'=> $cell,
+	// 'village'=> $village,
+
+?> 

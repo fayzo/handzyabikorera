@@ -22,9 +22,17 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
         Left JOIN cells C ON H. cell = C. codecell
         Left JOIN vilages V ON H. village = V. CodeVillage 
         Left JOIN users U ON H. user_id3 = U. user_id 
-        Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
+        Left JOIN agent_message A ON  H. craft_id = A. craft_id_msg 
+        Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list  and  W. item_purchased_on = 'off'
+
     WHERE H. craft_id = $craft_id ");
     $craft = $query->fetch_array();
+
+    $result= $mysqli->query("SELECT * FROM agent_message WHERE craft_id_msg =  $craft_id ");
+    
+    $counts= $mysqli->query("SELECT COUNT(*) as counts_reviews FROM agent_message WHERE craft_id_msg =  $craft_id ");
+    $count = $counts->fetch_array();
+
     ?>
 
     <div class="craft-popup">
@@ -95,10 +103,15 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 product_detail_side">
                                         <div class="abotext_box">
                                             <div class="product-heading">
-                                                <h2>Jane Lauren Design Chair</h2>
+                                                <h2><?php echo $craft['product_name']; ?></h2>
+                                                <!-- <h2>Jane Lauren Design Chair</h2> -->
                                             </div>
                                             <div class="product-detail-side">
-                                                <span><del>$679.89</del></span><span class="new-price">$547.60</span>
+                                            <?php if($craft['price_discount'] != 0){ ?>
+                                                <span><del>$<?php echo number_format($craft['price_discount']); ?></del></span>
+                                             <?php } ?>
+                                                <span class="new-price">$<?php echo number_format($craft['price']); ?></span>
+                                                <!-- <span><del>$679.89</del></span><span class="new-price">$547.60</span> -->
                                                 <br><span class="rating">
                                                     <i class="fa fa-star" aria-hidden="true"></i>
                                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -106,11 +119,11 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                                     <i class="fa fa-star" aria-hidden="true"></i>
                                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                                 </span>
-                                                <span class="review">(5 customer review)</span>
+                                                <span class="review">(<?php echo $count['counts_reviews']; ?> customer review)</span>
                                             </div>
                                             <div class="detail-contant">
-                                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-                                                    <br><span class="stock">2 in stock</span>
+                                                <p><?php echo $craft['text'];?>
+                                                    <br><span class="stock"><?php echo $craft['quantity'];?> in stock</span>
                                                 </p>
 
                                                  <?php if(isset($_SESSION['key_craft'])){ if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ ;?>
@@ -141,34 +154,42 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                     </div>
                                 </div>
                                 <div class="row">
+                                <?php if (!empty($craft['history_product'])){?>
+
                                     <div class="col-md-12">
                                         <div class="full">
                                             <div class="tab_bar_section">
                                                 <ul class="nav nav-tabs" role="tablist">
                                                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Description</a> </li>
-                                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Reviews (2)</a> </li>
+                                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Reviews (<?php echo $count['counts_reviews']; ?>)</a> </li>
                                                 </ul>
                                                 <!-- Tab panes -->
                                                 <div class="tab-content">
                                                     <div id="description" class="tab-pane active">
                                                         <div class="product_desc">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac elementum elit. Morbi eu arcu ipsum. Aliquam lobortis accumsan quam ac convallis. Fusce elit mauris, aliquet at odio vel, convallis vehicula nisi. Morbi vitae porttitor dolor. Integer eget metus sem. Nam venenatis mauris vel leo pulvinar, id rutrum dui varius. Nunc ac varius quam, non convallis magna. Donec suscipit commodo dapibus.
-                                                                <br>
-                                                                <br>Vestibulum et ullamcorper ligula. Morbi bibendum tempor rutrum. Pelle tesque auctor purus id molestie ornare.Donec eu lobortis risus. Pellentesque sed aliquam lorem. Praesent pulvinar lorem vel mauris ultrices posuere. Phasellus elit ex, gravida a semper ut, venenatis vitae diam. Nullam eget leo massa. Aenean eu consequat arcu, vitae scelerisque quam. Suspendisse risus turpis, pharetra a finibus vitae, lobortis et mi.</p>
+                                                            <p><?php echo $craft['history_product']; ?></p>
                                                         </div>
                                                     </div>
+
+
                                                     <div id="reviews" class="tab-pane fade">
                                                         <div class="product_review">
-                                                            <h3>Reviews (2)</h3>
+                                                            <h3>Reviews (<?php echo $count['counts_reviews']; ?>)</h3>
+                                                            <?php if (!empty($craft['message_client'])){ 
+
+                                                                while ($agent_message = $result->fetch_array()) {
+                                                                    # code...
+                                                                ?>
                                                             <div class="commant-text row">
                                                                 <div class="col-lg-2 col-md-2 col-sm-4">
                                                                     <div class="profile">
-                                                                        <img class="img-responsive" src="<?php echo BASE_URL_LINK ;?>images/lllll.png" alt="#">
+                                                                        <img class="img-responsive" src="<?php echo BASE_URL_LINK ;?>image/img/quotations-button.png" alt="#">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-10 col-md-10 col-sm-8">
-                                                                    <h5>Ravi</h5>
-                                                                    <p><span class="c_date">July 23, 2019</span> | <span><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></span></p>
+                                                                    <h5><?php echo $agent_message['name_client']; ?></h5>
+                                                                    <p><span class="c_date"><?php echo $users->timeAgo($agent_message['datetime']); ?></span> 
+                                                                    <!-- | <span><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></span></p> -->
                                                                     <span class="rating">
                                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -176,29 +197,14 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
                                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                                                     </span>
-                                                                    <p class="msg">ThisThis book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, “Lorem ipsum dolor sit amet..
-                                                                    </p>
+                                                                    <p class="msg"><?php echo $agent_message['message_client']; ?></p>
                                                                 </div>
                                                             </div>
-                                                            <div class="commant-text row">
-                                                                <div class="col-lg-2 col-md-2 col-sm-4">
-                                                                    <div class="profile">
-                                                                        <img class="img-responsive" src="<?php echo BASE_URL_LINK ;?>images/lllll.png" alt="#">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-10 col-md-10 col-sm-8">
-                                                                    <h5>Ravi</h5>
-                                                                    <p><span class="c_date">July 23, 2019</span> | <span><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></span></p>
-                                                                    <span class="rating">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <p class="msg">Nunc augue purus, posuere in accumsan sodales ac, euismod at est. Nunc faccumsan ermentum consectetur metus placerat mattis. Praesent mollis justo felis, accumsan faucibus mi maximus et. Nam hendrerit mauris id scelerisque placerat. Nam vitae imperdiet turpis</p>
-                                                                </div>
-                                                            </div>
+
+                                                            <?php   }
+
+                                                            }  ?>
+
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="full review_bt_section">
@@ -236,10 +242,12 @@ if (isset($_POST['craft_id']) && !empty($_POST['craft_id'])) {
 
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -479,7 +487,7 @@ if (isset($_POST['name_clientToAgent']) && !empty($_POST['name_clientToAgent']))
 	'name_client'=> $name,
 	'email_client'=> $email, 
 	'message_client'=> $message, 
-    'user_id3'=> $user_id,
+    'user_id3_msg'=> $user_id,
     'craft_id_msg'=> $craft_id,
     'datetime'=> $datetime 
         ));

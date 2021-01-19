@@ -179,12 +179,13 @@ class Handmade extends Home {
             <?php 
             } 
 	}
-	
 
      public function invoice_report($user_id){ 
 
-        $result = $this->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'on' GROUP BY item_purchased_list HAVING COUNT(DISTINCT item_purchased_list)= 1 ");
-        foreach ($result as $key ) {
+        $results = $this->runQuery("SELECT * FROM craft_watchlist W LEFT JOIN checkout_payment C on C. item_purchased = W. item_purchased_list WHERE W. user_id3_list= $user_id and W. item_purchased_on = 'on' GROUP BY W. item_purchased_list HAVING COUNT(DISTINCT W. item_purchased_list)= 1 ORDER BY W. modified Desc");
+        if (count($results) > 0) {
+            # code...
+        foreach ($results as $key ) {
             $total_quantitys = 0;
             $total_price = 0;
             # code...
@@ -195,11 +196,12 @@ class Handmade extends Home {
             <table class="tbl-cart table table-responsive-sm table-hover table-bordered bg-light"  cellpadding="10" cellspacing="1">
             <thead class="main-active">
             <tr>
+            <th style="text-align:left;" width="2%">No</th>
             <th style="text-align:left;">Name</th>
             <th style="text-align:left;">Code</th>
             <th style="text-align:right;" width="5%">quantitys</th>
-            <th style="text-align:right;" width="10%">Unit Price</th>
-            <th style="text-align:right;" width="10%">Price</th>
+            <th style="text-align:right;" width="12%">Unit Price</th>
+            <th style="text-align:right;" width="13%">Price</th>
             <!-- <th style="text-align:center;" width="5%">Remove</th> -->
             </tr>	
              </thead>
@@ -208,14 +210,15 @@ class Handmade extends Home {
 
                 // $db =$this->database;
                 // $result = $this->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'on' GROUP BY item_purchased_list HAVING COUNT(DISTINCT item_purchased_list)=1 ");
-                $result = $this->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'on' and item_purchased_list = '$key[item_purchased_list]' ");
+                $result = $this->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'on' and item_purchased_list = '$key[item_purchased_list]' ORDER BY modified Desc ");
                 
                 // GROUP BY item_purchased_list HAVING COUNT(DISTINCT item_purchased_list) > 10 
-
+                $i=1;
                 foreach ($result as $item){
                     $item_price = $item["quantitys"]*$item["unit_price"];
             		?>
             				<tr>
+            				<td><?php echo $i++; ?></td>
             				<td><img src="<?php echo BASE_URL ;?>uploads/craft/<?php echo $item["photo_list"]; ?>" height='80px' width='80px' class="cart-item-image" /> <span class="ml-3"><?php echo $item["code_watchlist"]; ?></span></td>
             				<td><?php echo $item["code_watchlist"]; ?></td>
             				<td style="text-align:right;"><?php echo $item["quantitys"]; ?></td>
@@ -230,24 +233,121 @@ class Handmade extends Home {
             
             <tr>
             <td colspan="2" align="left" style="font-size:15px;font-weight:600">Total:</td>
-            <td align="right"><?php echo $total_quantitys; ?></td>
-            <td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price); ?></strong></td>
+            <td align="right" colspan="2"><?php echo $total_quantitys; ?></td>
+            <td align="right" colspan="3"><strong><?php echo "$ ".number_format($total_price); ?></strong></td>
             <!-- <td></td> -->
             </tr>
             <tr>
-                <td colspan="1" align="left">Remove this invoice:</td>
+                <td colspan="2" align="left">
+                    <div>
+                    <span style="font-size:15px;font-weight:600">Shipping Address</span> : 
+                
+                        <br><span >Name</span>: <?php echo $key["lastname"]; ?> 
+                        <span >email</span>: <?php echo $key["email"]; ?> 
+                        <span >phone</span>: <?php echo $key["phone"]; ?> 
+                        <br><span >address</span> : <?php echo $key["address"].' ,'.$key["address2"]; ?> 
+                        <span >Country</span> : <?php echo $key["country"]; ?>
+                    </div>
+                </td>
+                <td colspan="5" align="left">
+                
+                    <div style="position: relative;height: 40px;">
+                        <div class="progress progress-xs mb-2">
+                            <?php echo $this->Users_usage_shipping($key["shipping_percentage"]) ;?>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left">Remove this invoice:</td>
                 <td colspan="5" align="center">
-                    <form method="post" id="form-craft-cartitem<?php echo $item['code_watchlist']; ?>remove" >
-                        <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $item['user_id3_list']; ?>" />
+                    <form method="post" id="form-craft-cartitem<?php echo $key['code_watchlist']; ?>remove" >
+                        <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $key['user_id3_list']; ?>" />
                         <input type="hidden" style="width:30px;" name="actions" value="remove" />
-                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $item['code_watchlist']; ?>" />
-                        <a href="javascript:void(0);" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$item['code_watchlist'].'remove'; ?>','<?php echo $item['code_watchlist']; ?>');"><img src="<?php echo BASE_URL_LINK ;?>image/product-images/icon-delete.png" alt="Remove Item" /></a> 
+                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $key['code_watchlist']; ?>" />
+                        <a href="javascript:void(0);" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$key['code_watchlist'].'remove'; ?>','<?php echo $key['code_watchlist']; ?>');"><img src="<?php echo BASE_URL_LINK ;?>image/product-images/icon-delete.png" alt="Remove Item" /></a> 
                     </form>
                 </td>
             </tr>
             </tbody>
             </table>		
         <?php }
+
+         }else{
+             echo ' <div class="col-md-12 col-lg-12"><div class="alert alert-danger alert-dismissible fade show text-center">
+                        <button class="close" data-dismiss="alert" type="button">
+                            <span>&times;</span>
+                        </button>
+                        <strong>No Record</strong>
+                    </div></div>'; 
+        }
+	}
+
+     public function shipping_order(){ 
+
+        // $result = $this->runQuery("SELECT * , COUNT(*) as `count`FROM craft_watchlist WHERE item_purchased_on = 'on' GROUP BY item_purchased_list HAVING COUNT(DISTINCT item_purchased_list)= 1 ORDER BY modified Desc");
+        // foreach ($result as $key ) {
+        //     $total_quantitys = 0;
+        //     $total_price = 0;
+            # code...
+        ?>
+
+            <table class="tbl-cart table table-responsive-sm table-hover table-bordered bg-light"  cellpadding="10" cellspacing="1">
+            <thead class="main-active">
+            <tr>
+                <th style="text-align:left;" width="2%">No</th>
+                <th style="text-align:left;">Name</th>
+                <th style="text-align:left;">email</th>
+                <th style="text-align:left;">Phone</th>
+                <th style="text-align:right;" width="5%">address</th>
+                <th style="text-align:right;" width="11%">Total quantity</th>
+                <th style="text-align:right;" width="10%">Total price</th>
+                <th style="text-align:right;" width="10%">date Time</th>
+                <th style="text-align:right;" width="10%">Action</th>
+            </tr>	
+             </thead>
+            <tbody>
+            <?php	
+
+                $result = $this->runQuery("SELECT * ,COUNT(*) as `count`, 
+                SUM(price_watchlist) as `total_prices` FROM checkout_payment C
+                Left JOIN craft_watchlist W on W. item_purchased_list= C. item_purchased 
+                WHERE  C. item_purchased = W. item_purchased_list 
+                GROUP BY W. item_purchased_list HAVING COUNT(DISTINCT W. item_purchased_list)=1 ORDER BY C. datetime Desc");
+                // GROUP BY item_purchased_list HAVING COUNT(DISTINCT item_purchased_list) > 10 
+                
+                $i=1;
+                foreach ($result as $item){
+            		?>
+            				<tr>
+                                <td> <?php echo $i++ ; ?></td>
+                                <td> <?php echo $item["firstname"].' '.$item["lastname"]; ?></td>
+                                <td><?php echo $item["email"]; ?></td>
+                                <td><?php echo $item["phone"]; ?></td>
+                                <td><?php echo $item["address"]; ?></td>
+                                <!-- <td>< ?php echo $item["total_quantity"]; ?></td> -->
+                                <td align="center"><?php echo $item["count"]; ?></td>
+                                <td align="right"><?php echo "$ ".number_format($item["total_prices"]); ?></td>
+                                <td align="right"><?php echo $this->timeAgo($item["datetime"]); ?></td>
+                                <td align="right"><button type="button" id="view_clients_order"  data-user="<?php echo $item['user_id3']; ?>" data-order="<?php echo $item['item_purchased']; ?>" 
+                                data-datetime="<?php echo $item['modified']; ?>" class="btn btn-outline-primary">View</button></td>
+                                <td align="center">
+                                    <form method="post" id="form-craft-cartitem<?php echo $item['item_purchased']; ?>remove" >
+                                        <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $item['user_id3']; ?>" />
+                                        <input type="hidden" style="width:30px;" name="actions" value="remove" />
+                                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $item['item_purchased']; ?>" />
+                                        <a href="javascript:void(0);" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$item['item_purchased'].'remove'; ?>','<?php echo $item['item_purchased']; ?>');"><img src="<?php echo BASE_URL_LINK ;?>image/product-images/icon-delete.png" alt="Remove Item" /></a> 
+                                    </form>
+                                </td>
+            				</tr>
+                    <?php
+
+                    }
+                ?>
+            
+            </tbody>
+            </table>		
+        <?php 
 	}
 	
     public function Craft_showCart_itemSale(){
@@ -507,20 +607,20 @@ class Handmade extends Home {
             if($pages === 0 || $pages < 1){
                 $showpages = 0 ;
             }else{
-                $showpages = ($pages*10)-10;
+                $showpages = ($pages*9)-9;
             }
             $mysqli= $this->database;
-            $query= $mysqli->query("SELECT * FROM craft H
-                Left JOIN provinces P ON H. province = P. provincecode
-                Left JOIN districts M ON H. districts = M. districtcode
-                Left JOIN sectors T ON H. sector = T. sectorcode
-                Left JOIN cells C ON H. cell = C. codecell
-                Left JOIN vilages V ON H. village = V. CodeVillage 
-                Left JOIN users U ON H. user_id3 = U. user_id 
-                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
+            // $query= $mysqli->query("SELECT * FROM craft H
+            //     Left JOIN provinces P ON H. province = P. provincecode
+            //     Left JOIN districts M ON H. districts = M. districtcode
+            //     Left JOIN sectors T ON H. sector = T. sectorcode
+            //     Left JOIN cells C ON H. cell = C. codecell
+            //     Left JOIN vilages V ON H. village = V. CodeVillage 
+            //     Left JOIN users U ON H. user_id3 = U. user_id 
+            //     Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
             
-            WHERE H. categories_craft ='$categories' ORDER BY rand(), H. created_on3 Desc Limit $showpages,10");
-            
+            // WHERE H. categories_craft ='$categories' ORDER BY  H. created_on3 Desc Limit $showpages,9");
+            // rand(),
             if($categories == 'Featured'){
                 $query= $mysqli->query("SELECT * FROM craft H
                 Left JOIN provinces P ON H. province = P. provincecode
@@ -531,7 +631,7 @@ class Handmade extends Home {
                 Left JOIN users U ON H. user_id3 = U. user_id 
                 Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
             
-                ORDER BY rand(), H. created_on3 Desc Limit $showpages,10");
+                ORDER BY H. created_on3 Desc Limit $showpages,9");
             
             }else{
                 $query= $mysqli->query("SELECT * FROM craft H
@@ -543,7 +643,7 @@ class Handmade extends Home {
                 Left JOIN users U ON H. user_id3 = U. user_id 
                 Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
             
-                WHERE H. categories_craft ='$categories' ORDER BY rand(), H. created_on3 Desc Limit $showpages,10");
+                WHERE H. categories_craft ='$categories' ORDER BY H. created_on3 Desc Limit $showpages,9");
             
             } ?>
             <div id="house-hide" > 
@@ -551,10 +651,10 @@ class Handmade extends Home {
             <div class="tab-content">
             <div class="active tab-pane" id="<?php echo $categories; ?>">
             
+            <?php if ($query->num_rows > 0) { ?>
             <div class="row product_style_3">
-            <?php if ($query->num_rows > 0) { 
                     
-            while($craft= $query->fetch_array()) { 
+           <?php while($craft= $query->fetch_array()) { 
 
             $likes= $this->likes($user_id,$craft['craft_id']); ?>
 
@@ -611,13 +711,12 @@ class Handmade extends Home {
                 </div>
                 <div class="product_detail text_align_center">
                     <p class="product_price">$<?php echo  number_format($craft['price']); ?> <?php echo ($craft['price_discount'] != 0)?' <span class="old_price">$'. number_format($craft['price']).'</span>':'' ;?> </p>
-                    <p class="product_descr"><?php echo $craft['code'] ;?></p>
+                    <p class="product_descr"><?php echo $craft['product_name'] ;?></p>
                     <div style="display:inline-block" class="text-muted">
                         <span style="text-align:left"><?php echo $craft['quantity'] ;?> in stock</span>
                         <span style="text-align:right">$ <?php echo  number_format($craft['price']) ;?></span>
                     </div>
                     <div>
-                    
                         <?php if($likes['like_on'] == $craft['craft_id']){ ?>
                             <span <?php if(isset($_SESSION['key_craft'])){ echo 'class="unlike-btn"'; }else{ echo 'id="login-please" data-login="1" '; } ?> style="font-size:20px;" data-craft="<?php echo $craft['craft_id']; ?>"  data-user="<?php echo $craft['user_id']; ?>">You <i style="color:red;" class="fa fa-heart"></i> Like It </span>
                         <?php }else{ ?>
@@ -630,21 +729,27 @@ class Handmade extends Home {
             </div>
 
           <?php } ?>
+          </div>
 
            <!-- END timeline item -->
            <?php
+            if($categories == 'Featured'){
                     
-                    $query1= $mysqli->query("SELECT COUNT(*) FROM craft WHERE categories_craft ='$categories' ");
-                    $row_Paginaion = $query1->fetch_array();
-                    $total_Paginaion = array_shift($row_Paginaion);
-                    $post_Perpages = $total_Paginaion/10;
-                    $post_Perpage = ceil($post_Perpages); ?> 
+                $query1= $mysqli->query("SELECT COUNT(*) FROM craft");
+            }else {
+                $query1= $mysqli->query("SELECT COUNT(*) FROM craft WHERE categories_craft ='$categories' ");
+                       # code...
+            }
+                $row_Paginaion = $query1->fetch_array();
+                $total_Paginaion = array_shift($row_Paginaion);
+                $post_Perpages = $total_Paginaion/9;
+                $post_Perpage = ceil($post_Perpages); ?> 
             <!-- END timeline item -->
    
 
         <?php if($post_Perpage > 1){ ?>
          <nav>
-             <ul class="pagination justify-content-center mt-3">
+             <ul class="pagination justify-content-center mt-3 mb-3">
                  <?php if ($pages > 1) { ?>
                      <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="craftCategories('<?php echo $categories; ?>',<?php echo $pages-1; ?>,<?php echo $user_id ; ?>)">Previous</a></li>
                  <?php } ?>
@@ -673,7 +778,6 @@ class Handmade extends Home {
     echo '
     </div>
     </div>
-    </div>
     </div>';
         
      }
@@ -685,7 +789,7 @@ class Handmade extends Home {
             if($pages === 0 || $pages < 1){
                 $showpages = 0 ;
             }else{
-                $showpages = ($pages*10)-10;
+                $showpages = ($pages*9)-9;
             }
             $mysqli= $this->database;
             $query= $mysqli->query("SELECT * FROM craft H
@@ -695,10 +799,10 @@ class Handmade extends Home {
                 Left JOIN cells C ON H. cell = C. codecell
                 Left JOIN vilages V ON H. village = V. CodeVillage 
                 Left JOIN users U ON H. user_id3 = U. user_id 
-                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
+                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
                 Left JOIN likes L ON H. craft_id = L. like_on 
     
-            WHERE H. craft_id = L. like_on and L. like_by = $user_id ORDER BY rand() Desc Limit $showpages,10");
+            WHERE H. craft_id = L. like_on and L. like_by = $user_id ORDER BY rand() Desc Limit $showpages,9");
             ?>
     
             <div id="house-hide" > 
@@ -706,9 +810,9 @@ class Handmade extends Home {
             <div class="tab-content">
             <div class="active tab-pane" id="#">
                 
-            <div class="row product_style_3">
 
             <?php if ($query->num_rows > 0) { ?>
+            <div class="row product_style_3">
 
             <?php while($craft= $query->fetch_array()) { 
 
@@ -721,15 +825,7 @@ class Handmade extends Home {
 
                     <?php if(isset($_SESSION['key_craft'])){ if($craft['user_id3_list'] != $user_id && $craft['craft_id_list'] != $craft['craft_id']  ){ ;?>
                             <div class="overlay_hover">
-                                <form method="post" id="form-craft-cartitem<?php echo $craft['code']; ?>add">
-                                    <div style="display:inline-flex;" >
-                                        <input type="hidden" style="width:30px;" name="user_id" value="<?php echo $user_id; ?>" />
-                                        <input type="hidden" style="width:30px;" name="actions" value="add" />
-                                        <input type="hidden" style="width:30px;" name="code" value="<?php echo $craft['code']; ?>" />
-                                        <input type="hidden" class="form-control form-control-sm text-center mr-2" style="width:30px;" name="quantitys" value="1" size="2" readonly/>
-                                        <a class="add-bt" href="#" onclick="xxda('add','<?php echo 'form-craft-cartitem'.$craft['code'].'add'; ?>','<?php echo $craft['code']; ?>');" >+ Add to WatchList</a>
-                                    </div>
-                                </form>
+                                  <a class="add-bt" href="javascript:void(0)" id="craft-readmore" data-craft="<?php echo $craft['craft_id']; ?>"  >+ ADD TO CART</a>
                             </div>
                         <?php }else{ ;?>
                             <div class="overlay_hover">
@@ -741,14 +837,18 @@ class Handmade extends Home {
                                         <a class="add-bt" href="#" onclick="xxda('remove','<?php echo 'form-craft-cartitem'.$craft['code'].'remove'; ?>','<?php echo $craft['code']; ?>');" >remove Watch-list</a> 
                                 </form>
                             </div>
-                        <?php } } ;?>
+                        <?php } }else{ ?>
+                            <div class="overlay_hover">
+                                  <a class="add-bt" href="javascript:void(0)" id="craft-readmore" data-craft="<?php echo $craft['craft_id']; ?>"  >+ ADD TO CART</a>
+                            </div>
+                        <?php } ;?>
                     
                     <!-- <div class="overlay_hover"> <a class="add-bt" href="product_detail3.php">+ Add to cart</a> </div> -->
                     </div>
                 </div>
                 <div class="product_detail text_align_center">
                     <p class="product_price">$<?php echo  number_format($craft['price']); ?> <?php echo ($craft['price_discount'] != 0)?' <span class="old_price">$'. number_format($craft['price']).'</span>':'' ;?> </p>
-                    <p class="product_descr"><?php echo $craft['code'] ;?></p>
+                    <p class="product_descr"><?php echo $craft['product_name'] ;?></p>
                     <div style="display:inline-block" class="text-muted">
                         <span style="text-align:left"><?php echo $craft['quantity'] ;?> in stock</span>
                         <span style="text-align:right">$ <?php echo  number_format($craft['price']) ;?></span>
@@ -767,6 +867,7 @@ class Handmade extends Home {
             </div>
 
           <?php } ?>
+          </div>
 
            <!-- END timeline item -->
            <?php
@@ -811,7 +912,6 @@ class Handmade extends Home {
     }
 
     echo '
-    </div>
     </div>
     </div>
     </div>';
@@ -1279,7 +1379,6 @@ class Handmade extends Home {
     </table>
 
     <?php   }
-
 
 
     public function newsletter_subscribe(){ ?>

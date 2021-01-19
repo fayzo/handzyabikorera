@@ -60,6 +60,21 @@ function fundAddmoreVideo() {
   $('.progress-hidez').hide();
 }
 
+function fundAddmoreHistory() {
+  $('#add-History').show();
+  $("#add-History").html(
+  ' <div class="form-group mt-2">'+
+  '<label >Description of History</label>'+
+    '<textarea class="form-control" name="additioninformation_History" id="addition-information-History" placeholder="tell us about history of product" rows="3"></textarea>'+
+  '</div>'+
+ ' <div class="form-group mt-2">'+
+  '<label >Review ur products</label>'+
+   ' <textarea class="form-control" name="additioninformation_products" id="addition-information-products" placeholder="tell us you are review" rows="3"></textarea>'+ 
+ '</div>');
+  $('#add-more').attr('onclick','fundCloseHistory()');
+  $('.progress-hidez').hide();
+}
+
 function AddVideo() {
   $('#add-video').show();
   $("#add-video").html(
@@ -101,6 +116,10 @@ function Addyoutube() {
 function fundCloseVideo() {
   $("#add-videohelp").html(" ");
   $('#add-more').attr('onclick', 'fundAddmoreVideo()');
+}
+function fundCloseHistory() {
+  $("#add-History").html(" ");
+  $('#add-more').attr('onclick', 'fundAddmoreHistory()');
 }
 
 function CloseVideo() {

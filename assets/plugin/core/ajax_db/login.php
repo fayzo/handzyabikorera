@@ -127,7 +127,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                   <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                     <div class="login-card-body">
                         <p class="login-box-msg">Sign in to start your session</p>
-
+                            <span id="responses"></span>
                             <div class="input-group mb-3">
                             <input type="email" class="form-control" name="usernameoremail" id="usernameoremail" placeholder="Username Or Email">
                             <div class="input-group-append">

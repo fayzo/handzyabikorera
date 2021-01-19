@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="title">
-                  <h2>Your Order</h2>
+                  <h2>Shipping Order</h2>
                 
                 </div>
             </div>
@@ -23,10 +23,9 @@
           <div class="row">
               <div class="col-md-10 offset-1">
                   <div class="text-center">
-                      <h1>Report of transaction invoice</h1>
-                      <p>For <?php echo $user['username']; ?></p>
+                      <h1>Report of Shipping Order to clients</h1>
                   </div>
-                  <?php echo $handmade->invoice_report($user_id); ?>
+                  <?php echo $handmade->shipping_order(); ?>
               </div>
           </div>
       </div>

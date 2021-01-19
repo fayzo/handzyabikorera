@@ -19,7 +19,9 @@
                         <div class="col-md-3">
                             <span id="responseSubmitfooditerm"> </span>
                             <div id="responseSubmitfooditermview">
-                                <?php echo $handmade->Craft_showCart_itemSale(); ?>
+                                <?php echo $handmade->Craft_showCart_itemSale(); 
+                                    // var_dump($_SESSION["like_cart_item"]); 
+                                ?>
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ if (!isset($_SESSION['keys'])) {
 if (isset($_POST['key']) == 'lockscreen') {
     
     $password = $users->test_input($_POST['password']);
-    $sql= $db->query("SELECT user_id ,username,approval,chat FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
+    $sql= $db->query("SELECT user_id ,username,approval,chat,register_as,email,admin FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
     $row= $sql->fetch_assoc();
 
     if ($sql->num_rows > 0) {
@@ -18,10 +18,14 @@ if (isset($_POST['key']) == 'lockscreen') {
         $db->query("UPDATE users SET last_login = '$datetime'  WHERE user_id= $_SESSION[keys] AND password= '$password' ");
         $db->query("UPDATE users SET counts_login=counts_login + 1 WHERE user_id= $_SESSION[keys] AND password= '$password' ");
         $db->query("UPDATE users SET chat = 'on' WHERE user_id= $_SESSION[keys] AND password= '$password' ");
-        $_SESSION['key'] = $row['user_id'];
+        $_SESSION['key_craft'] = $row['user_id'];
         $_SESSION['username'] = $row['username'];
+        $_SESSION['email'] = $row['email'];
         $_SESSION['approval'] = $row['approval'];
         $_SESSION['chat'] = $row['chat'];
+        $_SESSION['admin'] = $row['register_as'];
+        $_SESSION['admin'] = $row['admin'];
+
         exit ('<div class="alert alert-success alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>

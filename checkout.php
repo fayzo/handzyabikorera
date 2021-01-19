@@ -25,7 +25,30 @@
 
           <span id="responseSubmitfooditerm"> </span>
           <div id="responseSubmitfooditermview">
-              <?php echo $handmade->Checkout_Craft_showCart_itemSale(); ?>
+              <?php echo $handmade->Checkout_Craft_showCart_itemSale(); 
+
+              // CALCULATE THE TOTAL OF ITEMS
+              // CALCULATE THE TOTAL OF ITEMS
+
+                  $total_quantitys = 0;
+                  $total_price = 0;
+        					foreach($_SESSION["like_cart_item"] as $k => $v) {
+
+                        $total_quantitys += $_SESSION["like_cart_item"][$k]["quantitys"];
+
+                        $price = $_SESSION["like_cart_item"][$k]["price"];
+                        $quantity = $_SESSION["like_cart_item"][$k]["quantitys"];
+
+                        $total_price += ($quantity*$price);
+                  }
+
+                // foreach($_SESSION["like_cart_item"] as $itemArray) {
+                //     var_dump($itemArray["craft_id"]);
+                // }
+              // CALCULATE THE TOTAL OF ITEMS
+              // CALCULATE THE TOTAL OF ITEMS
+
+              ?>
           </div>
           <!-- <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -76,6 +99,8 @@
           <form class="needs-validation" id="form-checkout" method="post" novalidate>
             <div class="row">
               <div class="col-md-6 mb-3">
+                <input type="hidden" name="total_price" value="<?php echo $total_price;?>">
+                <input type="hidden" name="total_quantity" value="<?php echo $total_quantitys;?>">
                 <label for="firstName">First name</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -101,7 +126,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div class="row">
+              <div class="col-md-6 mb-3">
               <label for="username">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -114,8 +140,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="email">Email <span class="text-muted">(Optional)</span></label>
+            <div class="col-md-6 mb-3">
+              <label for="email">Email</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
@@ -123,6 +149,20 @@
                 <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
                 <div class="invalid-feedback">
                   Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+            </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Phone number</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                </div>
+                <input type="email" class="form-control" name="phone" id="phone" placeholder="phone number +">
+                <div class="invalid-feedback">
+                  Please enter a valid phone.
                 </div>
               </div>
             </div>

@@ -59,7 +59,7 @@ class Profile_craft_agent extends Handmade {
                 Left JOIN cells C ON H. cell = C. codecell
                 Left JOIN vilages V ON H. village = V. CodeVillage 
                 Left JOIN users U ON H. user_id3 = U. user_id 
-                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
+                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
     
             WHERE H. user_id3 = $user_id ORDER BY rand(), H. created_on3 Desc Limit $showpages,10");
                 # code...
@@ -72,7 +72,7 @@ class Profile_craft_agent extends Handmade {
                 Left JOIN cells C ON H. cell = C. codecell
                 Left JOIN vilages V ON H. village = V. CodeVillage 
                 Left JOIN users U ON H. user_id3 = U. user_id 
-                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list 
+                Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
     
                 WHERE H. categories_craft ='$categories' and H. user_id3 = $user_id ORDER BY rand(), H. created_on3 Desc Limit $showpages,10");
 
@@ -165,7 +165,10 @@ class Profile_craft_agent extends Handmade {
            <!-- END timeline item -->
            <?php
                     
-                    $query1= $mysqli->query("SELECT COUNT(*) FROM craft WHERE categories_craft ='$categories' and user_id3 = $user_id ");
+                    $query1= $mysqli->query("SELECT COUNT(*) FROM craft H 
+                    Left JOIN craft_watchlist W ON H. craft_id = W. craft_id_list and  W. item_purchased_on = 'off'
+                    WHERE categories_craft ='$categories' and user_id3 = $user_id ");
+                    
                     $row_Paginaion = $query1->fetch_array();
                     $total_Paginaion = array_shift($row_Paginaion);
                     $post_Perpages = $total_Paginaion/10;

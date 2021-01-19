@@ -33,6 +33,29 @@ $(document).ready(function() {
                 });
 
                 }
+        });
 
+        $(document).on('click', '#view_clients_order', function (e) {
+            e.stopPropagation();
+            var user = $(this).data('user');
+            var order = $(this).data('order');
+            var datetime = $(this).data('datetime');
+
+            $.ajax({
+                url: 'core/ajax_db/shipping_order',
+                method: 'POST',
+                dataType: 'text',
+                data: {
+                    user: user,
+                    order: order,
+                    datetime: datetime
+                }, success: function (response) {
+                    $(".popupTweet").html(response);
+                    $(".close-imagePopup").click(function () {
+                        $(".craft-popup").hide();
+                    });
+                    // console.log(response);
+                }
+            });
         });
 });

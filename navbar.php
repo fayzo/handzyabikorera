@@ -1,12 +1,21 @@
 
 <body class="hold-transition main-layout sidebar-collapse">
 
+    <div class="progress progress-navbar m-0 fixed-top" style="height: 6px;display:none">
+        <span class="progress-bar bg-info" role="progressbar"
+            style="width:0%;" id="progress_width" aria-valuenow="" aria-valuemin="0"
+            aria-valuemax="100"></span>
+    </div>
+
 <!-- loader  -->
 <div class="loader_bg">
     <div class="loader"><img src="<?php echo BASE_URL_LINK ;?>images/loading.gif" alt="#" /></div>
 </div>
  <!-- end loader -->
-
+<div class="text-center">
+    <!-- <div id="loader" style="display: none;"></div> -->
+    <img id="loader" src="<?php echo BASE_URL_LINK."image/users_profile_cover/"?>loading.svg" style="display: none;"/> 
+</div>
 <div class="wrapper">
    
     <div class="sidebar main-sidebar">
@@ -80,7 +89,7 @@
                             <div class="full">
                                 <div class="center-desk">
                                     <div class="logo">
-                                        <a href="index.php"><img src="<?php echo BASE_URL_LINK ;?>images/logo.jpg" alt="#"></a>
+                                        <a href="<?php echo HOME ;?>"><img src="<?php echo BASE_URL_LINK ;?>images/logo.jpg" alt="#"></a>
                                     </div>
                                 </div>
                             </div>
@@ -88,13 +97,28 @@
                         <div class="col-lg-9">
                             <div class="right_header_info">
                                 <ul class="users_pro">
+                                         <?php if (isset($_SESSION['key_craft'])) { ?>
+                                    <li>
+                                       <a href="invoice_list" class="btn btn-outline-success btn-sm border-0 ">
+                                       <i class="fa fa-book"></i> Your order</a>
+                                    </li>
+                                    <?php if ($_SESSION['admin'] == 'admin') { ?>
+
+                                    <li>
+                                       <a style="border: none;" href="shipping_order" class="btn btn-sm btn-outline-success" >
+                                       <i class="fa fa-shopping-cart"></i> Shipping order </a>
+                                    </li>
+                                             <?php } }?>
                                     <li>
                                         <img style="width:25px;" src="<?php echo BASE_URL_LINK ;?>image/img/rw-flag.jpg">
                                         <span style="color:#2b2828">Rwanda</span>
                                     </li>
+                                         <?php if (isset($_SESSION['key_craft']) && ($_SESSION['admin'] == 'admin')) { ?>
                                     <li>
                                         <a style="border: none;" href="javascript:void(0)" class="btn btn-sm btn-outline-primary" id="add_craft" data-craft="<?php echo $user_id; ?>" ><i class="fa fa-edit"></i> + Add Craft </a>
                                     </li>
+                                          <?php } ?>
+                                
                                     <li class="users_pro_li">
                                         <!-- <a href="#"><img style="margin-right: 15px;" src="< ?php echo BASE_URL_LINK ;?>icon/1.png" alt="#" /></a> -->
                                         <?php if (isset($_SESSION['key_craft'])) { ?>
@@ -165,9 +189,14 @@
                                             <!-- <a style="color:white;border: none;" class="btn btn-sm btn-outline-success" id="login-please" data-login="1" href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i> login</a> -->
                                         <?php } ?>
                                     </li>
+
                                     <li class="tytyu" style="position: relative;display: inline-block;">
-                                        <?php if ($user['likes_counts'] > 0){ echo '<span class="likescounter badge badge-danger navbar-badge">'.$user["likes_counts"].'</span>' ;} ?>
-                                        <a href="<?php echo LIKE_HAND_MADE ;?>"> <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/2.png" alt="#" /></a>
+                                        <?php if (isset($_SESSION['key_craft'])) { ?>
+                                            <?php if ($user['likes_counts'] > 0){ echo '<span class="likescounter badge badge-danger navbar-badge">'.$user["likes_counts"].'</span>' ;} ?>
+                                            <a href="<?php echo LIKE_HAND_MADE ;?>"> <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/2.png" alt="#" /></a>
+                                        <?php }else{ ?>
+                                            <a href="javascript:void(0);"> <img style="margin-right: 15px;" src="<?php echo BASE_URL_LINK ;?>icon/2.png" alt="#" /></a>
+                                        <?php } ?>
                                     </li>
                                     <li>
                                         <?php if(isset($_SESSION["like_cart_item"])){ ?>

@@ -79,11 +79,11 @@ $(document).ready(function () {
         var categories_craft = $('#categories_craft');
         var price = $('#price');
         var phone = $('#phone');
-        var province = $('.provincecode');
-        var districts = $('.districtcode');
-        var sector = $('.sectorcode');
-        var cell = $('.codecell');
-        var village = $('.CodeVillage');
+        // var province = $('.provincecode');
+        // var districts = $('.districtcode');
+        // var sector = $('.sectorcode');
+        // var cell = $('.codecell');
+        // var village = $('.CodeVillage');
         var photo_Titleo0 = $('#photo-Titleo0');
         var photo_Title0 = $('#photo-Title0');
         var photo_Title1 = $('#photo-Title1');
@@ -91,12 +91,15 @@ $(document).ready(function () {
         var photo_Title3 = $('#photo-Title3');
         var photo_Title4 = $('#photo-Title4');
         var photo_Title5 = $('#photo-Title5');
-        var code = $('#code');
 
+        var product_name = $('#product_name');
+        var stock = $('#stock');
 
-        if (isEmpty(province) && isEmpty(districts) &&
-            isEmpty(sector) && isEmpty(cell) && isEmpty(village) && isEmpty(authors) && isEmpty(phone) &&
-            isEmpty(categories_craft) && isEmpty(code) && isEmpty(price) && isEmpty(additioninformation) && isEmpty(photo) &&
+        // isEmpty(province) && isEmpty(districts) &&
+        // isEmpty(sector) && isEmpty(cell) && isEmpty(village) &&
+
+        if (isEmpty(authors) && isEmpty(phone) && isEmpty(categories_craft) && isEmpty(product_name) && 
+            isEmpty(stock) && isEmpty(price) && isEmpty(additioninformation) && isEmpty(photo) &&
             isEmpty(other_photo) && isEmpty(photo_Titleo0) && isEmpty(photo_Title0) && isEmpty(photo_Title1) &&
             isEmpty(photo_Title2) && isEmpty(photo_Title3) && isEmpty(photo_Title4) && isEmpty(photo_Title5)) {
 

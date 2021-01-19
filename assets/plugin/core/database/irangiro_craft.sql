@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2021 at 04:07 AM
+-- Generation Time: Jan 19, 2021 at 06:28 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -34,7 +34,7 @@ CREATE TABLE `agent_message` (
   `email_client` varchar(200) NOT NULL,
   `phone_client` varchar(200) NOT NULL,
   `message_client` text NOT NULL,
-  `user_id3` int(11) NOT NULL,
+  `user_id3_msg` int(11) NOT NULL,
   `craft_id_msg` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `datetime` datetime NOT NULL
@@ -44,8 +44,71 @@ CREATE TABLE `agent_message` (
 -- Dumping data for table `agent_message`
 --
 
-INSERT INTO `agent_message` (`message_id`, `name_client`, `email_client`, `phone_client`, `message_client`, `user_id3`, `craft_id_msg`, `status`, `datetime`) VALUES
-(1, 'shema', 'sj@yaho.com', '', 'amakuru', 1, 42, 0, '2021-01-06 22:12:56');
+INSERT INTO `agent_message` (`message_id`, `name_client`, `email_client`, `phone_client`, `message_client`, `user_id3_msg`, `craft_id_msg`, `status`, `datetime`) VALUES
+(1, 'shema', 'sj@yaho.com', '', 'amakuru', 1, 42, 0, '2021-01-06 22:12:56'),
+(2, 'shema', 'irangiroltd@ygmail.com', '', 'nikiza gifite isuku', 1, 60, 0, '2021-01-14 21:26:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `annual_report_customers`
+--
+
+CREATE TABLE `annual_report_customers` (
+  `craft_watchlist_id` int(11) NOT NULL,
+  `craft_id_list` int(11) NOT NULL,
+  `user_id3_list` int(11) NOT NULL,
+  `code_watchlist` char(55) NOT NULL,
+  `status_craft` int(11) NOT NULL,
+  `categories` varchar(100) NOT NULL,
+  `photo_Title_main_list` varchar(300) NOT NULL,
+  `photo_list` varchar(300) NOT NULL,
+  `quantitys` int(11) NOT NULL,
+  `unit_price` float NOT NULL,
+  `price_watchlist` float NOT NULL,
+  `item_purchased_list` varchar(200) NOT NULL,
+  `item_purchased_on` char(11) NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `annual_report_customers`
+--
+
+INSERT INTO `annual_report_customers` (`craft_watchlist_id`, `craft_id_list`, `user_id3_list`, `code_watchlist`, `status_craft`, `categories`, `photo_Title_main_list`, `photo_list`, `quantitys`, `unit_price`, `price_watchlist`, `item_purchased_list`, `item_purchased_on`, `modified`) VALUES
+(1, 41, 1, 'intebe', 0, 'Wood_Craft', 'intebe', '2021_404myst.png', 1, 50000, 50000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:09'),
+(2, 42, 1, 'amenza', 0, 'Wood_Craft', 'amenza', '2021_636avan.jpg', 1, 100000, 100000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:17'),
+(3, 43, 1, 'ameza meza', 0, 'Wood_Craft', 'imeza', '2021_35blog.jpg', 1, 100000, 100000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:36'),
+(4, 44, 1, 'ikibindi', 0, 'Arts', 'ikibindi', '2021_1406630.jpg', 1, 20000, 20000, 'shema2021-01-10_03:58:22_254', 'on', '2021-01-10 03:57:16'),
+(5, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'shema2021-01-10_04:52:26_730', 'on', '2021-01-10 04:51:28'),
+(6, 46, 1, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:16'),
+(7, 47, 1, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:28'),
+(8, 48, 1, 'ibikorwa', 0, 'Wood_Craft', 'uko duboha', '2021_312down.jpg', 1, 34000, 34000, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:38'),
+(11, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'shema2021-01-13_09:13:11_216', 'on', '2021-01-13 09:12:12'),
+(12, 52, 8, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'karim2021-01-13_09:47:12_480', 'on', '2021-01-13 09:45:21'),
+(13, 46, 8, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:48:11'),
+(14, 47, 8, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:49:08'),
+(15, 42, 8, 'amenza', 0, 'Wood_Craft', 'amenza', '2021_636avan.jpg', 1, 100000, 100000, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:49:20'),
+(16, 46, 1, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:01'),
+(17, 47, 1, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:06'),
+(18, 44, 1, 'ikibindi', 0, 'Arts', 'ikibindi', '2021_1406630.jpg', 1, 20000, 20000, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:18'),
+(19, 45, 9, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:00'),
+(20, 52, 9, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:06'),
+(21, 49, 9, 'udukorwa', 0, 'Homeware', 'abikorera', '2021_264imag.jpg', 1, 80000, 80000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:13'),
+(22, 50, 9, 'utwo bambara', 0, 'Jewellery', 'imitako', '2021_953images.jpg', 1, 40000, 40000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:17'),
+(28, 52, 1, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'casonova2021-01-14_21:09:17_352', 'on', '2021-01-14 21:09:17'),
+(29, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'muhire2021-01-14_21:13:34_210', 'on', '2021-01-14 21:13:34'),
+(30, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'kaboss2021-01-14_21:25:17_622', 'on', '2021-01-14 21:25:17'),
+(31, 60, 1, 'igitabaro_289', 0, 'Wood_Craft', 'imitako', '2021_295imag.jpg', 1, 4000, 4000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:22:17'),
+(32, 60, 1, 'igitabaro_289', 0, 'Wood_Craft', 'imitako', '2021_295imag.jpg', 1, 4000, 4000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:25:23'),
+(33, 60, 1, 'igitabaro_289', 0, 'Wood_Craft', 'imitako', '2021_295imag.jpg', 1, 4000, 4000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:25:47'),
+(34, 60, 1, 'igitabaro_289', 0, 'Wood_Craft', 'imitako', '2021_295imag.jpg', 1, 4000, 4000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(35, 54, 1, 'intebe_nziza_179', 0, 'Arts', 'intebe', '2021_91989-2.jpg', 1, 20000, 20000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(36, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(37, 56, 1, 'umuseke_271', 0, 'Arts', 'umuseke', '2021_401vase.jpg', 1, 30000, 30000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(38, 52, 1, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(39, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41'),
+(40, 55, 1, 'ameza_396', 0, 'Arts', 'imeza', '2021_103down.jpg', 1, 40000, 40000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:27:41');
 
 -- --------------------------------------------------------
 
@@ -2714,6 +2777,7 @@ CREATE TABLE `checkout_payment` (
   `lastname` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address2` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2728,6 +2792,9 @@ CREATE TABLE `checkout_payment` (
   `cc_cvv_payment` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id3` int(11) NOT NULL,
   `item_purchased` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_quantity` int(11) NOT NULL,
+  `total_price` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_percentage` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2735,10 +2802,16 @@ CREATE TABLE `checkout_payment` (
 -- Dumping data for table `checkout_payment`
 --
 
-INSERT INTO `checkout_payment` (`chekout_id`, `firstname`, `lastname`, `username`, `email`, `address`, `address2`, `country`, `state`, `zip`, `shipping`, `save_information_to_use_it`, `paymentMethod`, `cc_name_payment`, `cc_number_payment`, `cc_expiration_payment`, `cc_cvv_payment`, `user_id3`, `item_purchased`, `datetime`) VALUES
-(7, 'shema', 'shema', 'shema', 'shema@yahoo.com', 'kg', 'rw', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '0765-767856', '20-20', '4353', 1, '', '2021-01-10 04:46:23'),
-(8, 'asdas', 'sdassa', 'sada', 'asdsa@vmao.com', 'sfsd', 'fdsf', 'United States', 'California', '25425', 'on', 'on', 'on', 'dfdsf', 'sdfds', 'dfds', 'dfsd', 1, 'sada2021-01-10_04:50:17_217', '2021-01-10 04:50:17'),
-(9, 'shema', 'shema', 'shema', 'shema@vmail.com', 'kg', 'gasabo', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '7309-4957309-434', '34-34', '254', 1, 'shema2021-01-10_03:58:22_254', '2021-01-10 03:58:22');
+INSERT INTO `checkout_payment` (`chekout_id`, `firstname`, `lastname`, `username`, `email`, `phone`, `address`, `address2`, `country`, `state`, `zip`, `shipping`, `save_information_to_use_it`, `paymentMethod`, `cc_name_payment`, `cc_number_payment`, `cc_expiration_payment`, `cc_cvv_payment`, `user_id3`, `item_purchased`, `total_quantity`, `total_price`, `shipping_percentage`, `datetime`) VALUES
+(8, 'asdas', 'sdassa', 'sada', 'asdsa@vmao.com', '0879857388', 'sfsd', 'fdsf', 'United States', 'California', '25425', 'on', 'on', 'on', 'dfdsf', 'sdfds', 'dfds', 'dfsd', 1, 'sada2021-01-10_04:50:17_217', 0, '', '500', '2021-01-10 04:50:17'),
+(9, 'shema', 'shema', 'shema', 'shema@vmail.com', '0879857388', 'kg', 'gasabo', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '7309-4957309-434', '34-34', '254', 1, 'shema2021-01-10_03:58:22_254', 0, '', '600', '2021-01-10 03:58:22'),
+(10, 'shema', 'shema', 'shema', 'shema@yahoo.com', '0879857388', 'kg', 'rw', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '4h34kk-434g-4-34', '23-23', '242', 1, 'shema2021-01-10_04:52:26_730', 0, '', '200', '2021-01-10 04:52:26'),
+(11, 'shema', 'fayzo', 'shema', 'shema@vmail.com', '0879857388', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '654-5645-43534-34', '34-32', '23432', 1, 'shema2021-01-10_04:21:46_753', 0, '', '800', '2021-01-10 04:21:46'),
+(16, 'shema', 'shema', 'shema', 'shema@vmail.com', '0879857388', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'shema', '356-534-54354', '20-23', '245', 1, 'shema2021-01-13_12:10:33_753', 3, '72300', '300', '2021-01-13 12:10:33'),
+(17, 'jean', 'jean', 'jean', 'jean@vmail.com', '0879857388', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'jean', '245--345-3453-4', '434-34', '4534', 9, 'jean2021-01-13_12:57:09_40', 4, '503500', '300', '2021-01-13 12:57:09'),
+(18, 'muhire', 'muhire', 'muhire', 'muhire@yahoo.com', '078568789', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'muhire', '346363-454352-24', '2021', '230', 1, 'muhire2021-01-14_21:13:34_210', 1, '20000', '300', '2021-01-14 21:13:34'),
+(19, 'kaboss', 'kaboss', 'kaboss', 'kaboss@gmail.com', '006768e46567', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'kaboss', 'R565-6346-4363', '20121-23', '2454', 1, 'kaboss2021-01-14_21:25:17_622', 1, '20000', '880', '2021-01-14 21:25:17'),
+(20, 'jari', 'jari', 'jari', 'jari@yahoo.com', '0787435', 'KG', 'RW', 'United States', 'California', '7014', 'on', 'on', 'on', 'jari', '3563-53-454-53', '2021', '2454', 1, 'jari2021-01-14_21:27:42_248', 7, '497500', '483', '2021-01-14 21:27:42');
 
 -- --------------------------------------------------------
 
@@ -2786,14 +2859,16 @@ CREATE TABLE `craft` (
   `cell` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `village` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `history_product` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `categories_craft` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int(11) NOT NULL,
   `approval_top` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discount` int(11) NOT NULL,
   `price_discount` float(10,2) NOT NULL,
   `banner` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `buy` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stock` int(11) NOT NULL,
   `user_id3` int(11) NOT NULL,
   `created_on3` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2802,11 +2877,27 @@ CREATE TABLE `craft` (
 -- Dumping data for table `craft`
 --
 
-INSERT INTO `craft` (`craft_id`, `authors`, `photo`, `other_photo`, `video`, `youtube`, `price`, `phone`, `country01`, `photo_Title_main`, `photo_Title`, `city`, `province`, `districts`, `sector`, `cell`, `village`, `text`, `categories_craft`, `code`, `quantity`, `approval_top`, `discount`, `price_discount`, `banner`, `buy`, `user_id3`, `created_on3`) VALUES
-(41, 'shema', '2021_404myst.png', '2021_596myst.png', '', '', 50000.00, '0738534', 'RW', 'intebe', 'ni nziza=====', '', '2', '201', '2010602', '20106', '201060205', 'intebe', 'Wood_Craft', 'intebe', 1, '', 0, 0.00, '', 'sold', 1, '2021-01-02 17:48:08'),
-(42, 'shema', '2021_636avan.jpg', '2021_451blog.jpg', '', '', 100000.00, '078732343', 'RW', 'amenza', 'iyumukara=====', '', '1', '102', '1020402', '10204', '102040202', 'amenza meza', 'Wood_Craft', 'amenza', 1, '', 0, 0.00, '', 'sale', 1, '2021-01-02 17:34:50'),
-(43, 'shema', '2021_35blog.jpg', '2021_286blol.jpg', '', '', 100000.00, '08763294', 'RW', 'imeza', 'ifite ibyuma byiza=====', '', '3', '301', '3010603', '30106', '301060302', 'ni nziza', 'Wood_Craft', 'ameza meza', 1, '', 0, 0.00, '', 'sale', 1, '2021-01-02 17:31:46'),
-(44, 'shema', '2021_1406630.jpg', '2021_933down.jpg', '', '', 20000.00, '0789647824', 'RW', 'ikibindi', 'udukubo=====', '', '1', '102', '1020802', '10208', '102080205', 'ikibindi', 'Arts', 'ikibindi', 1, '', 0, 0.00, '', '', 1, '2021-01-10 03:56:50');
+INSERT INTO `craft` (`craft_id`, `authors`, `photo`, `other_photo`, `video`, `youtube`, `price`, `phone`, `country01`, `photo_Title_main`, `photo_Title`, `city`, `province`, `districts`, `sector`, `cell`, `village`, `text`, `history_product`, `categories_craft`, `code`, `product_name`, `quantity`, `approval_top`, `price_discount`, `banner`, `buy`, `stock`, `user_id3`, `created_on3`) VALUES
+(41, 'shema', '2021_404myst.png', '2021_596myst.png', '', '', 50000.00, '0738534', 'RW', 'intebe', 'ni nziza=====', '', '2', '201', '2010602', '20106', '201060205', 'intebe', '', 'Wood_Craft', 'intebe', 'intebe', 1, '', 0.00, '', 'sold', 1, 1, '2021-01-02 17:48:08'),
+(42, 'shema', '2021_636avan.jpg', '2021_451blog.jpg', '', '', 100000.00, '078732343', 'RW', 'amenza', 'iyumukara=====', '', '1', '102', '1020402', '10204', '102040202', 'amenza meza', '', 'Wood_Craft', 'amenza', 'amenza', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-02 17:34:50'),
+(43, 'shema', '2021_35blog.jpg', '2021_286blol.jpg', '', '', 100000.00, '08763294', 'RW', 'imeza', 'ifite ibyuma byiza=====', '', '3', '301', '3010603', '30106', '301060302', 'ni nziza', '', 'Wood_Craft', 'ameza meza', 'ameza meza', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-02 17:31:46'),
+(44, 'shema', '2021_1406630.jpg', '2021_933down.jpg', '', '', 20000.00, '0789647824', 'RW', 'ikibindi', 'udukubo=====', '', '1', '102', '1020802', '10208', '102080205', 'ikibindi', '', 'Arts', 'ikibindi', 'ikibindi', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 03:56:50'),
+(45, 'shema', '2021_503imag.jpg', '2021_683down.jpg', '', '', 30000.00, '078483754', 'RW', 'uducuma', 'uducuma twiza=====', '', '1', '102', '1020303', '10203', '102030302', 'uducuma', '', 'Wood_Craft', 'uducuma', 'uducuma', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:48:38'),
+(46, 'shema', '2021_463imag.jpg', '2021_108imag.jpg', '', '', 20000.00, '048594793', 'RW', 'umutako', 'aho tumurika=====', '', '2', '202', '2020301', '20203', '202030103', 'ibibindi', '', 'Arts', 'ibibindi', 'ibibindi', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:00:52'),
+(47, 'shema', '2021_472down.jpg', '2021_242down.jpg', '', '', 32300.00, '0074384', 'RW', 'ibiyiranga', 'udukweto=====', '', '2', '201', '2010601', '20106', '201060104', 'umutako', '', 'Wood_Craft', 'umutako', 'umutako', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:02:12'),
+(48, 'shema', '2021_312down.jpg', '2021_383imag.jpg', '', '', 34000.00, '08397434', 'RW', 'uko duboha', 'abikorera=====', '', '1', '101', '1010201', '10102', '101020105', 'ubukorikori', '', 'Wood_Craft', 'ibikorwa', 'ibikorwa', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:03:52'),
+(49, 'shema', '2021_264imag.jpg', '2021_728imag.jpg', '', '', 80000.00, '0782752', 'RW', 'abikorera', 'aho ducuruza=====', '', '2', '202', '2020501', '20205', '202050104', 'abakora', '', 'Homeware', 'udukorwa', 'udukorwa', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:05:06'),
+(50, 'shema', '2021_953images.jpg', '2021_351imag.jpg', '', '', 40000.00, '077878743', 'RW', 'imitako', 'aho bacuruza=====', '', '3', '301', '3010401', '30104', '301040104', 'utwo bambara', '', 'Jewellery', 'utwo bambara', 'utwo bambara', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:06:15'),
+(51, 'shema', '2021_466imag.jpg', '2021_446imag.jpg', '', '', 80000.00, '07892342', 'RW', 'ababanzi', 'udutako=====', '', '2', '202', '2020301', '20203', '202030104', 'imicenyero', '', 'Arts', 'imicenyero', 'imicenyero', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:07:22'),
+(52, 'shema', '2021_111down.jpg', '2021_354imag.jpg', '', '', 353500.00, '0869878', 'RW', 'ingare', 'aho baccuruza=====', '', '2', '202', '2020403', '20204', '202040304', 'udutakotwiza', '', 'Homeware', 'udutakotwiza', 'udutakotwiza', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:08:53'),
+(53, 'shema', '2021_674down.jpg', '2021_181imag.jpg', '', '', 353500.00, '0869878', 'RW', 'ingare', 'aho baccuruza=====', '', '2', '202', '2020403', '20204', '202040304', 'udutakotwiza', '', 'Homeware', 'udutakotwiza', 'udutakotwiza', 1, '', 0.00, '', 'sale', 1, 1, '2021-01-10 04:08:53'),
+(54, 'shema', '2021_91989-2.jpg', '2021_297down.jpg', '', '', 20000.00, '078658767', 'RW', 'intebe', 'akabati=====', '', '', '', '', '', '', 'intebe nzizia', '', 'Arts', 'intebe_nziza_179', 'intebe nziza', 1, '', 0.00, '', 'sale', 3, 1, '2021-01-14 21:43:42'),
+(55, 'muhire', '2021_103down.jpg', '2021_999unna.jpg', '', '', 40000.00, '07972944', 'RW', 'imeza', 'agatebe=====', '', '', '', '', '', '', 'ni nziza', '', 'Arts', 'ameza_396', 'ameza', 4, '', 0.00, '', 'sale', 4, 1, '2021-01-14 20:54:53'),
+(56, 'shema', '2021_401vase.jpg', '2021_708vase.jpg', '', '', 30000.00, '0786555467', 'RW', 'umuseke', 'ikibindi=====', '', '', '', '', '', '', 'it is in good condition and it weight a little bit', '', 'Arts', 'umuseke_271', 'umuseke', 4, '', 0.00, '', 'sale', 4, 1, '2021-01-14 21:20:07'),
+(57, 'dsfsdfsd', '2021_844vase.jpg', '2021_424vase.jpg', '', '', 45364.00, '0786675798', 'RW', 'umuseke', 'akabindi=====', '', '', '', '', '', '', 'it is good', '', 'Arts', 'umuseke_480', 'umuseke', 44, '', 0.00, '', 'sale', 44, 1, '2021-01-14 21:24:08'),
+(58, 'dsfsdfsd', '2021_131vase.jpg', '2021_606vase.jpg', '', '', 45364.00, '0786675798', 'RW', 'umuseke', 'akabindi=====', '', '', '', '', '', '', 'it is good', 'it was in last decade', 'Arts', 'umuseke_713', 'umuseke', 44, '', 0.00, '', 'sale', 44, 1, '2021-01-14 21:25:23'),
+(59, 'shema', '2021_893imag.jpg', '2021_165prim.jpg', '', '', 20000.00, '078655879', 'RW', 'udufuniko', 'ababazi=====', '', '', '', '', '', '', 'ikibindi', 'i was use in last decade', 'Arts', 'ikibindi_959', 'ikibindi', 3, '', 0.00, '', 'sale', 3, 1, '2021-01-14 21:50:44'),
+(60, 'shema', '2021_295imag.jpg', '2021_562imag.jpg', '', '', 4000.00, '0869798', 'RW', 'imitako', 'uduseke=====', '', '', '', '', '', '', 'kimeze neza gifite isuku', 'cya koreshwaga gutaka hanze', 'Wood_Craft', 'igitabaro_289', 'igitabaro', 4, '', 0.00, '', 'sale', 4, 1, '2021-01-14 21:26:17');
 
 -- --------------------------------------------------------
 
@@ -2839,7 +2930,33 @@ INSERT INTO `craft_watchlist` (`craft_watchlist_id`, `craft_id_list`, `user_id3_
 (1, 41, 1, 'intebe', 0, 'Wood_Craft', 'intebe', '2021_404myst.png', 1, 50000, 50000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:09'),
 (2, 42, 1, 'amenza', 0, 'Wood_Craft', 'amenza', '2021_636avan.jpg', 1, 100000, 100000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:17'),
 (3, 43, 1, 'ameza meza', 0, 'Wood_Craft', 'imeza', '2021_35blog.jpg', 1, 100000, 100000, 'sada2021-01-10_04:50:17_217', 'on', '2021-01-10 04:45:36'),
-(4, 44, 1, 'ikibindi', 0, 'Arts', 'ikibindi', '2021_1406630.jpg', 1, 20000, 20000, 'shema2021-01-10_03:58:22_254', 'on', '2021-01-10 03:57:16');
+(4, 44, 1, 'ikibindi', 0, 'Arts', 'ikibindi', '2021_1406630.jpg', 1, 20000, 20000, 'shema2021-01-10_03:58:22_254', 'on', '2021-01-10 03:57:16'),
+(5, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'shema2021-01-10_04:52:26_730', 'on', '2021-01-10 04:51:28'),
+(6, 46, 1, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:16'),
+(7, 47, 1, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:28'),
+(8, 48, 1, 'ibikorwa', 0, 'Wood_Craft', 'uko duboha', '2021_312down.jpg', 1, 34000, 34000, 'shema2021-01-10_04:21:46_753', 'on', '2021-01-10 04:20:38'),
+(11, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'shema2021-01-13_09:13:11_216', 'on', '2021-01-13 09:12:12'),
+(12, 52, 8, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'karim2021-01-13_09:47:12_480', 'on', '2021-01-13 09:45:21'),
+(13, 46, 8, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:48:11'),
+(14, 47, 8, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:49:08'),
+(15, 42, 8, 'amenza', 0, 'Wood_Craft', 'amenza', '2021_636avan.jpg', 1, 100000, 100000, 'karim2021-01-13_09:50:17_644', 'on', '2021-01-13 09:49:20'),
+(16, 46, 1, 'ibibindi', 0, 'Arts', 'umutako', '2021_463imag.jpg', 1, 20000, 20000, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:01'),
+(17, 47, 1, 'umutako', 0, 'Wood_Craft', 'ibiyiranga', '2021_472down.jpg', 1, 32300, 32300, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:06'),
+(18, 44, 1, 'ikibindi', 0, 'Arts', 'ikibindi', '2021_1406630.jpg', 1, 20000, 20000, 'shema2021-01-13_12:10:33_753', 'on', '2021-01-13 12:48:18'),
+(19, 45, 9, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:00'),
+(20, 52, 9, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:06'),
+(21, 49, 9, 'udukorwa', 0, 'Homeware', 'abikorera', '2021_264imag.jpg', 1, 80000, 80000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:13'),
+(22, 50, 9, 'utwo bambara', 0, 'Jewellery', 'imitako', '2021_953images.jpg', 1, 40000, 40000, 'jean2021-01-13_12:57:09_40', 'on', '2021-01-13 12:56:17'),
+(27, 52, 1, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'casonova2021-01-14_21:09:17_352', 'on', '2021-01-14 20:55:50'),
+(28, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'muhire2021-01-14_21:13:34_210', 'on', '2021-01-14 21:11:38'),
+(29, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'kaboss2021-01-14_21:25:17_622', 'on', '2021-01-14 21:24:13'),
+(30, 60, 1, 'igitabaro_289', 0, 'Wood_Craft', 'imitako', '2021_295imag.jpg', 1, 4000, 4000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:20:39'),
+(31, 54, 1, 'intebe_nziza_179', 0, 'Arts', 'intebe', '2021_91989-2.jpg', 1, 20000, 20000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:20:45'),
+(32, 59, 1, 'ikibindi_959', 0, 'Arts', 'udufuniko', '2021_893imag.jpg', 1, 20000, 20000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:20:50'),
+(33, 56, 1, 'umuseke_271', 0, 'Arts', 'umuseke', '2021_401vase.jpg', 1, 30000, 30000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:20:55'),
+(34, 52, 1, 'udutakotwiza', 0, 'Homeware', 'ingare', '2021_111down.jpg', 1, 353500, 353500, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:21:01'),
+(35, 45, 1, 'uducuma', 0, 'Wood_Craft', 'uducuma', '2021_503imag.jpg', 1, 30000, 30000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:21:05'),
+(36, 55, 1, 'ameza_396', 0, 'Arts', 'imeza', '2021_103down.jpg', 1, 40000, 40000, 'jari2021-01-14_21:27:42_248', 'on', '2021-01-14 21:21:09');
 
 -- --------------------------------------------------------
 
@@ -2862,7 +2979,8 @@ CREATE TABLE `customers_reviews` (
 
 INSERT INTO `customers_reviews` (`reviews_id`, `name_review`, `email_review`, `message_review`, `approval_Review`, `datetime`) VALUES
 (1, 'shema', 'shema@vmail.com', 'it is good to purchase ut items i receive i didn\'t expect to see as i see on platforms', 'off', '0000-00-00 00:00:00'),
-(2, 'dsdd', 'efs@yaho.com', 'sdsds', 'on', '2021-01-06 22:01:43');
+(2, 'dsdd', 'efs@yaho.com', 'sdsds', 'on', '2021-01-06 22:01:43'),
+(3, 'lauren', 'lauren@vmail.com', 'it is a legit website they do the job as should be much appreciate', 'on', '2021-01-13 09:04:59');
 
 -- --------------------------------------------------------
 
@@ -3462,10 +3580,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `username`, `register_as`, `admin`, `likes_counts`, `password`, `telephone`, `twitter`, `instagram`, `facebook`, `location`, `skills`, `notes`, `chat`, `approval`, `last_login`, `last_profile_edit`, `counts_login`, `profile_img`, `date_registry`, `forgotUsernameCounts`, `forgotUsernameCountsTimesHeCreatespassword`) VALUES
-(1, 'clack', 'honfield', 'irangiroltd@ygmail.com', 'craft', 'Agent', 'admin', 2, 'fafa', '0782822402', 'irangiroH', 'irangiro house', 'irangiro house', 'KG 534 St ,', 'Negotiation,Patience,Attentiveness,Listening,Problem-Solving,Self-Control,', 'am professional of 2years in business and am honest', 'on', 'on', '2021-01-10 04:44:59', '2021-01-04 21:58:28', 179, '7355ba2.jpg', '2020-10-03 00:00:00', 0, 0),
+(1, 'clack', 'honfield', 'irangiroltd@ygmail.com', 'craft', 'Agent', 'admin', 2, 'fafa', '0782822402', 'irangiroH', 'irangiro house', 'irangiro house', 'KG 534 St ,', 'Negotiation,Patience,Attentiveness,Listening,Problem-Solving,Self-Control,', 'am professional of 2years in business and am honest', 'on', 'on', '2021-01-19 18:10:21', '2021-01-04 21:58:28', 212, '7355ba2.jpg', '2020-10-03 00:00:00', 0, 0),
 (2, 'nathalez', 'gollan', 'house.irangiro@iragiro.com', 'muhire', 'Agent', '', 0, 'muhire', '0730135543', 'irangiroH', 'irangirohouse', 'irangiro', 'kacyiru', 'mature,patience, control behaviour', 'profedssional 3 years', 'off', 'on', '2020-12-19 10:51:39', '2020-10-21 04:07:06', 5, 'agent-1.jpg', '2020-10-21 01:00:00', 1, 0),
 (6, 'shema', 'shema', 'shema@yahoo.com', 'shema', 'Buyer', '', 0, 'shema', '', '', '', '', '', '', '', 'off', 'off', '2020-12-18 04:40:36', '0000-00-00 00:00:00', 6, '', '2020-12-18 00:00:00', 0, 0),
-(7, 'fafa', 'fafa', 'fafa@gmail.com', 'fafa', 'buyer', '', 0, 'fafa', '', '', '', '', '', '', '', 'on', 'off', '2020-12-28 01:55:50', '0000-00-00 00:00:00', 6, '', '2020-12-28 00:00:00', 0, 0);
+(7, 'fafa', 'fafa', 'fafa@gmail.com', 'fafa', 'buyer', '', 0, 'fafa', '', '', '', '', '', '', '', 'on', 'off', '2020-12-28 01:55:50', '0000-00-00 00:00:00', 6, '', '2020-12-28 00:00:00', 0, 0),
+(8, 'karim', 'karim', 'karim@vmail.com', 'karim', 'buyer', '', 0, 'karim', '', '', '', '', '', '', '', 'on', 'off', '2021-01-13 09:46:20', '0000-00-00 00:00:00', 2, '', '2021-01-13 00:00:00', 0, 0),
+(9, 'jean', 'jean', 'jean@vmail.com', 'jean', 'buyer', '', 0, 'jean', '', '', '', '', '', '', '', 'on', 'off', '2021-01-13 12:54:31', '0000-00-00 00:00:00', 1, '', '2021-01-13 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -16048,6 +16168,12 @@ ALTER TABLE `agent_message`
   ADD PRIMARY KEY (`message_id`);
 
 --
+-- Indexes for table `annual_report_customers`
+--
+ALTER TABLE `annual_report_customers`
+  ADD PRIMARY KEY (`craft_watchlist_id`);
+
+--
 -- Indexes for table `banners_discount`
 --
 ALTER TABLE `banners_discount`
@@ -16147,7 +16273,13 @@ ALTER TABLE `vilages`
 -- AUTO_INCREMENT for table `agent_message`
 --
 ALTER TABLE `agent_message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `annual_report_customers`
+--
+ALTER TABLE `annual_report_customers`
+  MODIFY `craft_watchlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `banners_discount`
@@ -16171,7 +16303,7 @@ ALTER TABLE `business_message`
 -- AUTO_INCREMENT for table `checkout_payment`
 --
 ALTER TABLE `checkout_payment`
-  MODIFY `chekout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `chekout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `client_subscribe_email`
@@ -16183,19 +16315,19 @@ ALTER TABLE `client_subscribe_email`
 -- AUTO_INCREMENT for table `craft`
 --
 ALTER TABLE `craft`
-  MODIFY `craft_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `craft_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `craft_watchlist`
 --
 ALTER TABLE `craft_watchlist`
-  MODIFY `craft_watchlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `craft_watchlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `customers_reviews`
 --
 ALTER TABLE `customers_reviews`
-  MODIFY `reviews_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `reviews_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -16207,7 +16339,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

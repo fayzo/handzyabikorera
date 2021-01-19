@@ -44,16 +44,12 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
 
             if(empty($_SESSION["like_cart_item"])) {
                 $productByCode = $users->runQuery("SELECT * FROM craft_watchlist WHERE user_id3_list= $user_id and item_purchased_on = 'off' ");
-                $TotalcodeByCode = $users->runQuery("SELECT COUNT(*) AS Totalcode  FROM craft_watchlist WHERE user_id3_list=$user_id ");
                 if (!empty($productByCode[0]["code_watchlist"])) {
                     # code...
-                    $n = $TotalcodeByCode[0]['Totalcode'];
-                    $i=0; 
                     $itemArray=[];
-                    while ($i < $n) {
+                    foreach($productByCode as $k => $v) {
                         # code...
-                        $itemArray += array($productByCode[$i]["code_watchlist"]=>array('name'=>$productByCode[$i]["photo_Title_main_list"], 'code'=>$productByCode[$i]["code_watchlist"], 'user_id'=>$productByCode[$i]["user_id3_list"], 'quantitys'=>$productByCode[$i]["quantitys"], 'price'=> $productByCode[$i]["price_watchlist"]/$productByCode[$i]["quantitys"], 'image'=>$productByCode[$i]["photo_list"], 'craft_id'=>$productByCode[$i]["craft_id_list"], 'user_id3'=>$productByCode[$i]["user_id3_list"], 'categories'=>$productByCode[$i]["categories"]));
-                        $i++;
+                        $itemArray += array($productByCode[$k]["code_watchlist"]=>array('name'=>$productByCode[$k]["photo_Title_main_list"], 'code'=>$productByCode[$k]["code_watchlist"], 'user_id'=>$productByCode[$k]["user_id3_list"], 'quantitys'=>$productByCode[$k]["quantitys"], 'price'=> $productByCode[$k]["price_watchlist"]/$productByCode[$k]["quantitys"], 'image'=>$productByCode[$k]["photo_list"], 'craft_id'=>$productByCode[$k]["craft_id_list"], 'user_id3'=>$productByCode[$k]["user_id3_list"], 'categories'=>$productByCode[$k]["categories"]));
                     }
                     $_SESSION["like_cart_item"] = $itemArray;
                     // var_dump($itemArray);

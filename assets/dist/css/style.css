@@ -407,6 +407,19 @@ a.readmore_bt {
 .loader img {
 	width: 280px;
 }
+#loader {
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    top: 50%;
+	left: 50%;
+	z-index: 99999;
+    margin-top: -13px;
+    margin-left: -13px;
+    border-radius: 60px;
+    animation: loader 0.8s linear infinite;
+    -webkit-animation: loader 0.8s linear infinite;
+}
 
 
 /*----------------------------
@@ -2685,7 +2698,7 @@ padding: 60px 0px;
 .float-right {
 
     float: right !important;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 
 }
 

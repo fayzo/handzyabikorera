@@ -29,8 +29,8 @@ class Users extends Db{
     public function login($email,$password,$datetime)
     {
        $mysqli= $this->database;
-       $sql= $mysqli->query("SELECT user_id,username,approval,profile_img, chat,register_as,admin  FROM users WHERE username ='{$email}' AND password='{$password}' OR email ='{$email}'and password='{$password}' ");
-       $sql1= $mysqli->query("SELECT user_id ,username,profile_img ,approval, chat,register_as,admin FROM users WHERE username ='{$email}' or email ='{$email}'");
+       $sql= $mysqli->query("SELECT user_id,username,approval,profile_img, chat,register_as,email,admin  FROM users WHERE username ='{$email}' AND password='{$password}' OR email ='{$email}'and password='{$password}' ");
+       $sql1= $mysqli->query("SELECT user_id ,username,profile_img ,approval, chat,register_as,email,admin FROM users WHERE username ='{$email}' or email ='{$email}'");
 
         $row= $sql->fetch_assoc();
         $rows= $sql1->fetch_assoc();
@@ -39,6 +39,7 @@ class Users extends Db{
             $_SESSION['key_craft'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['approval'] = $row['approval'];
+            $_SESSION['email'] = $row['email'];
             $_SESSION['profile_img'] = $row['profile_img'];
             $_SESSION['chat'] = $row['chat'];
             $_SESSION['register_as'] = $row['register_as'];
@@ -161,8 +162,21 @@ class Users extends Db{
         }
     } 
 
+    public function Last_insert_id($table,$id)
+    {
+        $mysqli= $this->database;
+        // $row= json_encode($mysqli->insert_id);
+        // $row= json_encode($mysqli->insert_id);
+        // $row= $mysqli->query("SELECT LAST_INSERT_ID()");
+        // $row= $mysqli->query("SELECT $id FROM $table WHERE $id = LAST_INSERT_ID()");
+        // $row= $mysqli->query('SELECT SCOPE_IDENTITY()');
+        $row= $mysqli->query("SELECT MAX($id) as last_id FROM $table");
+        // $row= $mysqli->query("SELECT $id FROM $table order by $id DESC limit 1");
+        $row= $row->fetch_array();
+        // var_dump($row->fetch_array());
+        return $row['last_id'];
+    }
 
-    
     public function Postsjobscreates($table,$fields=array())
     {
         $mysqli= $this->database;
@@ -206,13 +220,13 @@ class Users extends Db{
     public function creates($table,$fields=array())
     {
         $mysqli= $this->database;
-        function addQuotes($str){
+        function addQuotes_($str){
             return "'$str'";
         }
          $valued = array();
         # Surround values by quotes
         foreach ($fields as $key => $value) {
-            $valued[] = addQuotes($value);
+            $valued[] = addQuotes_ ($value);
         }
         
         # Build the column
@@ -464,12 +478,12 @@ class Users extends Db{
     
     public function runQuery($query) {
         $mysqli= $this->database;
-		$result = $mysqli->query($query);
+        $result = $mysqli->query($query);
+        $resultset= array();
 		while($row=$result->fetch_assoc()) {
 			$resultset[] = $row;
 		}		
-		if(!empty($resultset))
-			return $resultset;
+        return $resultset;
 	}
 	
 	public function numRows($query) {
@@ -512,16 +526,17 @@ class Users extends Db{
     public function insertQuery($table,$fields=array())
     {
         $mysqli= $this->database;
-        function addQuotes($str){
-            return "'$str'";
-        }
+        // function addQuotes__($str){
+        //     return "'$str'";
+        // }
          $valued = array();
         # Surround values by quotes
         if(!array_key_exists('modified',$fields)){
             $fields['modified'] = date("Y-m-d H:i:s");
             }
         foreach ($fields as $key => $value) {
-            $valued[] = addQuotes($value);
+            // $valued[] =  addQuotes__($value);
+            $valued[] = "'$value'";
         }
         
         # Build the column
@@ -531,6 +546,33 @@ class Users extends Db{
         $values = implode(",", array_values($valued));
         # Build the insert query
         $queryl = "INSERT INTO $table (".$columns.") VALUES (".$values.")";
+        $query= $mysqli->query($queryl);
+        // var_dump( $queryl );
+    }
+
+    public function insertQueryAndUpdate($table,$fields=array(),$anothertable,$table_id,$id)
+    {
+        $mysqli= $this->database;
+        // function addQuote($str){
+        //     return "'$str'";
+        // }
+         $valued = array();
+        # Surround values by quotes
+        if(!array_key_exists('modified',$fields)){
+            $fields['modified'] = date("Y-m-d H:i:s");
+            }
+        foreach ($fields as $key => $value) {
+            // $valued[] = addQuote($value);
+                $valued[] = "'$value'";
+        }
+        
+        # Build the column
+        $columns = implode(",", array_keys($fields));
+        
+        # Build the values
+        $values = implode(",", array_values($valued));
+        # Build the insert query
+        $queryl = "INSERT INTO $table (".$columns.") SELECT ".$values." FROM ".$anothertable." WHERE ".$table_id = $id."";
         $query= $mysqli->query($queryl);
         // var_dump( $queryl );
     }
@@ -821,6 +863,126 @@ class Users extends Db{
             return '<div class="progress-bar bg-success" role="progressbar"
                     style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
                     aria-valuemax="100">'.($variable*100/1000).'%</div>';
+            break;
+        }
+    } 
+
+
+    function Users_usage_shipping($usage){
+        if($usage == 0){
+            $variable = 1;
+        }else{
+            $variable = $usage;
+        }
+
+    switch ($variable) {
+        case $variable <= 100 :
+            # code...
+            return '<div class="progress-bar bg-danger" role="progressbar"
+                    style="width: '.($variable * 100 / 1000).'%" aria-valuenow="'.($variable * 100 / 1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable * 100 / 1000).'% 
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 200 :
+            # code...
+            return '<div class="progress-bar bg-danger" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 300 :
+            # code...
+            return '<div class="progress-bar bg-danger" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 350:
+            # code...
+            return '<div class="progress-bar bg-warning" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 400:
+            # code...
+            return '<div class="progress-bar bg-info" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 500:
+            # code...
+            return '<div class="progress-bar bg-info" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 600:
+            # code...
+            return '<div class="progress-bar bg-info" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        case $variable <= 750:
+            # code...
+            return '<div class="progress-bar bg-primary" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
+            break;
+        default:
+            # code...
+            return '<div class="progress-bar bg-success" role="progressbar"
+                    style="width: '.($variable*100/1000).'%" aria-valuenow="'.($variable*100/1000).'" aria-valuemin="0"
+                    aria-valuemax="100">'.($variable*100/1000).'%
+                        <div class="progress-bar" style="width:'.($variable * 100 / 1000).'%;position: absolute;font-size: 20px;top: 15px;background: #f8f9fa;"> 
+                            <span>
+                                <i class="fas fa-truck text-danger" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>';
             break;
         }
     } 
