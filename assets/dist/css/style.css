@@ -2701,7 +2701,37 @@ padding: 60px 0px;
     /* margin-top: 30px; */
 
 }
+.fvh-ctr {
+	align-items: center;
+	justify-content: center!important;
+	display: flex;
+}
 
+.loading {
+    min-height: 100px;
+    width: 100px;
+    position: relative;
+}
+.fvh-ctr 
+.loading:after {
+    top: 0;
+    left: 0;
+}
+.loading:after {
+    -webkit-animation: a .5s infinite linear;
+    animation: a .5s infinite linear;
+    border: 10px solid #f5f5f5;
+    border-radius: 100%;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    display: block;
+    height: 5em;
+    width: 5em;
+    position: absolute;
+    left: calc(50% - 2.5em);
+    top: calc(50% - 2.5em);
+}
 
 
 

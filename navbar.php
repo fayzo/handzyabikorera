@@ -16,6 +16,9 @@
     <!-- <div id="loader" style="display: none;"></div> -->
     <img id="loader" src="<?php echo BASE_URL_LINK."image/users_profile_cover/"?>loading.svg" style="display: none;"/> 
 </div>
+
+<!-- <div class="fvh-ctr"><div class="loading"></div></div> -->
+
 <div class="wrapper">
    
     <div class="sidebar main-sidebar">

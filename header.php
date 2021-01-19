@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/style.css">
     <!-- Responsive-->
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/responsive.css">
+    <!-- <link rel="stylesheet" href="< ?php echo BASE_URL_LINK ;?>dist/css/animate.min.css"> -->
     <!-- icon -->
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/font-awesome.min.css" type="text/css">
