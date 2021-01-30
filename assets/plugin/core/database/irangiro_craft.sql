@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2021 at 06:28 PM
+-- Generation Time: Jan 30, 2021 at 08:32 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -3580,7 +3580,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `username`, `register_as`, `admin`, `likes_counts`, `password`, `telephone`, `twitter`, `instagram`, `facebook`, `location`, `skills`, `notes`, `chat`, `approval`, `last_login`, `last_profile_edit`, `counts_login`, `profile_img`, `date_registry`, `forgotUsernameCounts`, `forgotUsernameCountsTimesHeCreatespassword`) VALUES
-(1, 'clack', 'honfield', 'irangiroltd@ygmail.com', 'craft', 'Agent', 'admin', 2, 'fafa', '0782822402', 'irangiroH', 'irangiro house', 'irangiro house', 'KG 534 St ,', 'Negotiation,Patience,Attentiveness,Listening,Problem-Solving,Self-Control,', 'am professional of 2years in business and am honest', 'on', 'on', '2021-01-19 18:10:21', '2021-01-04 21:58:28', 212, '7355ba2.jpg', '2020-10-03 00:00:00', 0, 0),
+(1, 'clack', 'honfield', 'irangiroltd@ygmail.com', 'craft', 'Agent', 'admin', 2, 'fafa', '0782822402', 'irangiroH', 'irangiro house', 'irangiro house', 'KG 534 St ,', 'Negotiation,Patience,Attentiveness,Listening,Problem-Solving,Self-Control,', 'am professional of 2years in business and am honest', 'on', 'on', '2021-01-19 18:42:21', '2021-01-04 21:58:28', 215, '7355ba2.jpg', '2020-10-03 00:00:00', 0, 0),
 (2, 'nathalez', 'gollan', 'house.irangiro@iragiro.com', 'muhire', 'Agent', '', 0, 'muhire', '0730135543', 'irangiroH', 'irangirohouse', 'irangiro', 'kacyiru', 'mature,patience, control behaviour', 'profedssional 3 years', 'off', 'on', '2020-12-19 10:51:39', '2020-10-21 04:07:06', 5, 'agent-1.jpg', '2020-10-21 01:00:00', 1, 0),
 (6, 'shema', 'shema', 'shema@yahoo.com', 'shema', 'Buyer', '', 0, 'shema', '', '', '', '', '', '', '', 'off', 'off', '2020-12-18 04:40:36', '0000-00-00 00:00:00', 6, '', '2020-12-18 00:00:00', 0, 0),
 (7, 'fafa', 'fafa', 'fafa@gmail.com', 'fafa', 'buyer', '', 0, 'fafa', '', '', '', '', '', '', '', 'on', 'off', '2020-12-28 01:55:50', '0000-00-00 00:00:00', 6, '', '2020-12-28 00:00:00', 0, 0),
